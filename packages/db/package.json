@@ -1,0 +1,38 @@
+{
+  "name": "@the-monthly-sum/db",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#*": "./src/*"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema/index.ts"
+  },
+  "scripts": {
+    "clean": "git clean -xdf .turbo node_modules dist .tanstack .nitro .output",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:up": "bun exec \"docker run -d --name pg-the-monthly-sum -e POSTGRES_PASSWORD=mysecretpassword -v pgdata-the-monthly-sum:/var/lib/postgresql/data -p 5432:5432 postgres && echo 'DATABASE_URL=postgresql://postgres:mysecretpassword@localhost:5432/postgres' > ./.env && pnpm db:push\"",
+    "format": "prettier . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore --check",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "prettier": "@the-monthly-sum/prettier-config",
+  "dependencies": {
+    "@the-monthly-sum/env": "workspace:*",
+    "drizzle-kit": "catalog:drizzle",
+    "drizzle-orm": "catalog:drizzle",
+    "pg": "catalog:drizzle"
+  },
+  "devDependencies": {
+    "@the-monthly-sum/eslint-config": "workspace:*",
+    "@the-monthly-sum/prettier-config": "workspace:*",
+    "@the-monthly-sum/typescript-config": "workspace:*",
+    "@types/bun": "catalog:",
+    "@types/pg": "catalog:drizzle",
+    "typescript": "catalog:"
+  }
+}
