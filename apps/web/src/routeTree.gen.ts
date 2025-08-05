@@ -18,7 +18,10 @@ import { Route as Char123LocaleChar125AppIndexRouteImport } from './routes/{-$lo
 import { Route as Char123LocaleChar125AppProfileRouteImport } from './routes/{-$locale}/app/profile'
 import { Route as Char123LocaleChar125AppDashboardRouteImport } from './routes/{-$locale}/app/dashboard'
 import { Route as Char123LocaleChar125AppChatRouteImport } from './routes/{-$locale}/app/chat'
-import { Route as Char123LocaleChar125AppAddRouteImport } from './routes/{-$locale}/app/add'
+import { Route as Char123LocaleChar125AppAddIndexRouteImport } from './routes/{-$locale}/app/add.index'
+import { Route as Char123LocaleChar125AppAddCategoryRouteImport } from './routes/{-$locale}/app/add.$category'
+import { Route as Char123LocaleChar125AppAddCategoryIndexRouteImport } from './routes/{-$locale}/app/add.$category.index'
+import { Route as Char123LocaleChar125AppAddCategorySubcategoryIndexRouteImport } from './routes/{-$locale}/app/add.$category.$subcategory.index'
 import { ServerRoute as TrpcSplatServerRouteImport } from './routes/trpc.$'
 import { ServerRoute as AuthSplatServerRouteImport } from './routes/auth.$'
 
@@ -66,11 +69,29 @@ const Char123LocaleChar125AppChatRoute =
     path: '/chat',
     getParentRoute: () => Char123LocaleChar125AppRouteRoute,
   } as any)
-const Char123LocaleChar125AppAddRoute =
-  Char123LocaleChar125AppAddRouteImport.update({
-    id: '/add',
-    path: '/add',
+const Char123LocaleChar125AppAddIndexRoute =
+  Char123LocaleChar125AppAddIndexRouteImport.update({
+    id: '/add/',
+    path: '/add/',
     getParentRoute: () => Char123LocaleChar125AppRouteRoute,
+  } as any)
+const Char123LocaleChar125AppAddCategoryRoute =
+  Char123LocaleChar125AppAddCategoryRouteImport.update({
+    id: '/add/$category',
+    path: '/add/$category',
+    getParentRoute: () => Char123LocaleChar125AppRouteRoute,
+  } as any)
+const Char123LocaleChar125AppAddCategoryIndexRoute =
+  Char123LocaleChar125AppAddCategoryIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => Char123LocaleChar125AppAddCategoryRoute,
+  } as any)
+const Char123LocaleChar125AppAddCategorySubcategoryIndexRoute =
+  Char123LocaleChar125AppAddCategorySubcategoryIndexRouteImport.update({
+    id: '/$subcategory/',
+    path: '/$subcategory/',
+    getParentRoute: () => Char123LocaleChar125AppAddCategoryRoute,
   } as any)
 const TrpcSplatServerRoute = TrpcSplatServerRouteImport.update({
   id: '/trpc/$',
@@ -87,30 +108,38 @@ export interface FileRoutesByFullPath {
   '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
   '/{-$locale}/app': typeof Char123LocaleChar125AppRouteRouteWithChildren
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
-  '/{-$locale}/app/add': typeof Char123LocaleChar125AppAddRoute
   '/{-$locale}/app/chat': typeof Char123LocaleChar125AppChatRoute
   '/{-$locale}/app/dashboard': typeof Char123LocaleChar125AppDashboardRoute
   '/{-$locale}/app/profile': typeof Char123LocaleChar125AppProfileRoute
   '/{-$locale}/app/': typeof Char123LocaleChar125AppIndexRoute
+  '/{-$locale}/app/add/$category': typeof Char123LocaleChar125AppAddCategoryRouteWithChildren
+  '/{-$locale}/app/add': typeof Char123LocaleChar125AppAddIndexRoute
+  '/{-$locale}/app/add/$category/': typeof Char123LocaleChar125AppAddCategoryIndexRoute
+  '/{-$locale}/app/add/$category/$subcategory': typeof Char123LocaleChar125AppAddCategorySubcategoryIndexRoute
 }
 export interface FileRoutesByTo {
   '/{-$locale}': typeof Char123LocaleChar125IndexRoute
-  '/{-$locale}/app/add': typeof Char123LocaleChar125AppAddRoute
   '/{-$locale}/app/chat': typeof Char123LocaleChar125AppChatRoute
   '/{-$locale}/app/dashboard': typeof Char123LocaleChar125AppDashboardRoute
   '/{-$locale}/app/profile': typeof Char123LocaleChar125AppProfileRoute
   '/{-$locale}/app': typeof Char123LocaleChar125AppIndexRoute
+  '/{-$locale}/app/add': typeof Char123LocaleChar125AppAddIndexRoute
+  '/{-$locale}/app/add/$category': typeof Char123LocaleChar125AppAddCategoryIndexRoute
+  '/{-$locale}/app/add/$category/$subcategory': typeof Char123LocaleChar125AppAddCategorySubcategoryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
   '/{-$locale}/app': typeof Char123LocaleChar125AppRouteRouteWithChildren
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
-  '/{-$locale}/app/add': typeof Char123LocaleChar125AppAddRoute
   '/{-$locale}/app/chat': typeof Char123LocaleChar125AppChatRoute
   '/{-$locale}/app/dashboard': typeof Char123LocaleChar125AppDashboardRoute
   '/{-$locale}/app/profile': typeof Char123LocaleChar125AppProfileRoute
   '/{-$locale}/app/': typeof Char123LocaleChar125AppIndexRoute
+  '/{-$locale}/app/add/$category': typeof Char123LocaleChar125AppAddCategoryRouteWithChildren
+  '/{-$locale}/app/add/': typeof Char123LocaleChar125AppAddIndexRoute
+  '/{-$locale}/app/add/$category/': typeof Char123LocaleChar125AppAddCategoryIndexRoute
+  '/{-$locale}/app/add/$category/$subcategory/': typeof Char123LocaleChar125AppAddCategorySubcategoryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -118,29 +147,37 @@ export interface FileRouteTypes {
     | '/{-$locale}'
     | '/{-$locale}/app'
     | '/{-$locale}/'
-    | '/{-$locale}/app/add'
     | '/{-$locale}/app/chat'
     | '/{-$locale}/app/dashboard'
     | '/{-$locale}/app/profile'
     | '/{-$locale}/app/'
+    | '/{-$locale}/app/add/$category'
+    | '/{-$locale}/app/add'
+    | '/{-$locale}/app/add/$category/'
+    | '/{-$locale}/app/add/$category/$subcategory'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/{-$locale}'
-    | '/{-$locale}/app/add'
     | '/{-$locale}/app/chat'
     | '/{-$locale}/app/dashboard'
     | '/{-$locale}/app/profile'
     | '/{-$locale}/app'
+    | '/{-$locale}/app/add'
+    | '/{-$locale}/app/add/$category'
+    | '/{-$locale}/app/add/$category/$subcategory'
   id:
     | '__root__'
     | '/{-$locale}'
     | '/{-$locale}/app'
     | '/{-$locale}/'
-    | '/{-$locale}/app/add'
     | '/{-$locale}/app/chat'
     | '/{-$locale}/app/dashboard'
     | '/{-$locale}/app/profile'
     | '/{-$locale}/app/'
+    | '/{-$locale}/app/add/$category'
+    | '/{-$locale}/app/add/'
+    | '/{-$locale}/app/add/$category/'
+    | '/{-$locale}/app/add/$category/$subcategory/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -223,12 +260,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125AppChatRouteImport
       parentRoute: typeof Char123LocaleChar125AppRouteRoute
     }
-    '/{-$locale}/app/add': {
-      id: '/{-$locale}/app/add'
+    '/{-$locale}/app/add/': {
+      id: '/{-$locale}/app/add/'
       path: '/add'
       fullPath: '/{-$locale}/app/add'
-      preLoaderRoute: typeof Char123LocaleChar125AppAddRouteImport
+      preLoaderRoute: typeof Char123LocaleChar125AppAddIndexRouteImport
       parentRoute: typeof Char123LocaleChar125AppRouteRoute
+    }
+    '/{-$locale}/app/add/$category': {
+      id: '/{-$locale}/app/add/$category'
+      path: '/add/$category'
+      fullPath: '/{-$locale}/app/add/$category'
+      preLoaderRoute: typeof Char123LocaleChar125AppAddCategoryRouteImport
+      parentRoute: typeof Char123LocaleChar125AppRouteRoute
+    }
+    '/{-$locale}/app/add/$category/': {
+      id: '/{-$locale}/app/add/$category/'
+      path: '/'
+      fullPath: '/{-$locale}/app/add/$category/'
+      preLoaderRoute: typeof Char123LocaleChar125AppAddCategoryIndexRouteImport
+      parentRoute: typeof Char123LocaleChar125AppAddCategoryRoute
+    }
+    '/{-$locale}/app/add/$category/$subcategory/': {
+      id: '/{-$locale}/app/add/$category/$subcategory/'
+      path: '/$subcategory'
+      fullPath: '/{-$locale}/app/add/$category/$subcategory'
+      preLoaderRoute: typeof Char123LocaleChar125AppAddCategorySubcategoryIndexRouteImport
+      parentRoute: typeof Char123LocaleChar125AppAddCategoryRoute
     }
   }
 }
@@ -251,22 +309,43 @@ declare module '@tanstack/react-start/server' {
   }
 }
 
+interface Char123LocaleChar125AppAddCategoryRouteChildren {
+  Char123LocaleChar125AppAddCategoryIndexRoute: typeof Char123LocaleChar125AppAddCategoryIndexRoute
+  Char123LocaleChar125AppAddCategorySubcategoryIndexRoute: typeof Char123LocaleChar125AppAddCategorySubcategoryIndexRoute
+}
+
+const Char123LocaleChar125AppAddCategoryRouteChildren: Char123LocaleChar125AppAddCategoryRouteChildren =
+  {
+    Char123LocaleChar125AppAddCategoryIndexRoute:
+      Char123LocaleChar125AppAddCategoryIndexRoute,
+    Char123LocaleChar125AppAddCategorySubcategoryIndexRoute:
+      Char123LocaleChar125AppAddCategorySubcategoryIndexRoute,
+  }
+
+const Char123LocaleChar125AppAddCategoryRouteWithChildren =
+  Char123LocaleChar125AppAddCategoryRoute._addFileChildren(
+    Char123LocaleChar125AppAddCategoryRouteChildren,
+  )
+
 interface Char123LocaleChar125AppRouteRouteChildren {
-  Char123LocaleChar125AppAddRoute: typeof Char123LocaleChar125AppAddRoute
   Char123LocaleChar125AppChatRoute: typeof Char123LocaleChar125AppChatRoute
   Char123LocaleChar125AppDashboardRoute: typeof Char123LocaleChar125AppDashboardRoute
   Char123LocaleChar125AppProfileRoute: typeof Char123LocaleChar125AppProfileRoute
   Char123LocaleChar125AppIndexRoute: typeof Char123LocaleChar125AppIndexRoute
+  Char123LocaleChar125AppAddCategoryRoute: typeof Char123LocaleChar125AppAddCategoryRouteWithChildren
+  Char123LocaleChar125AppAddIndexRoute: typeof Char123LocaleChar125AppAddIndexRoute
 }
 
 const Char123LocaleChar125AppRouteRouteChildren: Char123LocaleChar125AppRouteRouteChildren =
   {
-    Char123LocaleChar125AppAddRoute: Char123LocaleChar125AppAddRoute,
     Char123LocaleChar125AppChatRoute: Char123LocaleChar125AppChatRoute,
     Char123LocaleChar125AppDashboardRoute:
       Char123LocaleChar125AppDashboardRoute,
     Char123LocaleChar125AppProfileRoute: Char123LocaleChar125AppProfileRoute,
     Char123LocaleChar125AppIndexRoute: Char123LocaleChar125AppIndexRoute,
+    Char123LocaleChar125AppAddCategoryRoute:
+      Char123LocaleChar125AppAddCategoryRouteWithChildren,
+    Char123LocaleChar125AppAddIndexRoute: Char123LocaleChar125AppAddIndexRoute,
   }
 
 const Char123LocaleChar125AppRouteRouteWithChildren =

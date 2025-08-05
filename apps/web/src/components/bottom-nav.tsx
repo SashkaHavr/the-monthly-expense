@@ -17,7 +17,7 @@ export function BottomNavItem({
   to,
 }: {
   label: string;
-  icon: ({ className }: { className?: string }) => React.ReactNode;
+  icon: React.ComponentType<{ className?: string }>;
   to: LinkProps['to'];
 }) {
   return (
