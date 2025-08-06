@@ -22,17 +22,13 @@ export const Route = createFileRoute(
 });
 
 function RouteComponent() {
-  const navigate = Route.useNavigate();
-
   return (
     <div className="flex flex-col px-8">
       <div className="flex h-12 items-center">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate({ to: '..' })}
-        >
-          <ArrowLeftIcon />
+        <Button variant="ghost" size="icon" asChild>
+          <Route.Link to="/{-$locale}/app/add/$category">
+            <ArrowLeftIcon />
+          </Route.Link>
         </Button>
       </div>
       <div className="flex flex-col gap-8">
