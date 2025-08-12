@@ -1,4 +1,7 @@
 services:
+  db-studio:
+    ports:
+      - 4983:4983
   web:
     environment:
       AUTH_DEV_MAGIC_LINK: true

@@ -1,10 +1,10 @@
 import { Link } from '@tanstack/react-router';
 
-import { useOptionalTranslations } from '~/lib/route-context-hooks';
+import { useTranslationsFromRoute } from '~/hooks/route-context';
 import { Button } from './ui/button';
 
 export function NotFoundComponent() {
-  const t = useOptionalTranslations();
+  const t = useTranslationsFromRoute();
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-4 pb-20">
       <p className="text-lg font-semibold">
