@@ -52,9 +52,6 @@ The Monthly Sum is a mobile and web application designed for effortless personal
 ### 2.6 Profile & Settings
 
 - **Account:** Displays the user's email and provides a "Delete Account" option.
-- **Settings:**
-  - Set the default currency (e.g., USD, EUR, GBP).
-  - Toggle a single setting for a "Monthly Summary" email notification.
 - **Data:** Provides an option to "Export All Data" to CSV.
 
 ## 3.0 User Interface and Experience Flow
