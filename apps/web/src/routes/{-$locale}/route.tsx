@@ -13,7 +13,10 @@ export const Route = createFileRoute('/{-$locale}')({
 
     const currentMatch = matches[matches.length - 1]?.pathname;
     if (params.locale == undefined) {
-      const acceptLanguageHeader = await getAcceptLanguageHeaderServerFn();
+      const acceptLanguageHeader =
+        typeof window == 'undefined'
+          ? await getAcceptLanguageHeaderServerFn()
+          : navigator.languages;
       if (Array.isArray(acceptLanguageHeader)) {
         const preferredLocales = acceptLanguageHeader.filter(isLocale);
         const firstPreferredLocale = preferredLocales[0];

@@ -16,7 +16,14 @@ export function IntlProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-const formats = {} satisfies Formats;
+const formats = {
+  dateTime: {
+    monthYear: {
+      month: 'long',
+      year: 'numeric',
+    },
+  },
+} satisfies Formats;
 
 declare module 'use-intl' {
   interface AppConfig {

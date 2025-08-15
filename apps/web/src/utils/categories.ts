@@ -6,11 +6,10 @@ import {
   ShoppingCart,
 } from 'lucide-react';
 
-export const categories = [
+export const categories: Category[] = [
   {
     id: 'housing',
     name: 'Housing & Utilities',
-    icon: Home,
     color: 'bg-blue-500',
     subcategories: [
       { id: 'rent', name: 'Rent/Mortgage' },
@@ -23,7 +22,6 @@ export const categories = [
   {
     id: 'daily',
     name: 'Daily Spending',
-    icon: ShoppingCart,
     color: 'bg-purple-500',
     subcategories: [
       { id: 'groceries', name: 'Groceries' },
@@ -37,7 +35,6 @@ export const categories = [
   {
     id: 'financial',
     name: 'Financial & Savings',
-    icon: PiggyBank,
     color: 'bg-green-500',
     subcategories: [
       { id: 'savings', name: 'Savings' },
@@ -49,7 +46,6 @@ export const categories = [
   {
     id: 'insurance',
     name: 'Insurance & Health',
-    icon: Shield,
     color: 'bg-red-500',
     subcategories: [
       { id: 'health-insurance', name: 'Health Insurance' },
@@ -61,7 +57,6 @@ export const categories = [
   {
     id: 'income',
     name: 'Income',
-    icon: DollarSign,
     color: 'bg-emerald-500',
     subcategories: [
       { id: 'salary', name: 'Salary/Wages' },
@@ -72,10 +67,20 @@ export const categories = [
   },
 ];
 
+export const categoryIcons: Record<
+  string,
+  React.ComponentType<{ className?: string; size?: number }>
+> = {
+  housing: Home,
+  daily: ShoppingCart,
+  financial: PiggyBank,
+  insurance: Shield,
+  income: DollarSign,
+};
+
 export interface Category {
   id: string;
   name: string;
-  icon: React.ComponentType<{ className?: string; size?: number }>;
   color: string;
   subcategories: { id: string; name: string }[];
 }

@@ -6,7 +6,6 @@ export const Route = createFileRoute('/{-$locale}/app/add/$category')({
   beforeLoad: ({ params }) => {
     const category = categories.find((c) => c.id == params.category);
     if (!category) {
-      console.log('Category not found:', params.category);
       throw redirect({
         to: '/{-$locale}/app/add',
       });
