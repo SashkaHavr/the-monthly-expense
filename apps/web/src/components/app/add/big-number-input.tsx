@@ -28,13 +28,13 @@ export function BigNumberInput({
   }).formatToParts(1111.1);
 
   const currency = parts.find((part) => part.type == 'currency')?.value ?? '';
-  const group = parts.find((part) => part.type == 'group')?.value ?? '';
   const decimal = parts.find((part) => part.type == 'decimal')?.value ?? '';
-  const allExtraChars = [currency, group, decimal];
+  const allExtraChars = [currency, decimal];
 
   const stringValue = format.number(value, {
     style: 'currency',
     currency: 'EUR',
+    useGrouping: false,
   });
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -69,23 +69,68 @@ export function BigNumberInput({
       onKeyDown={(e) => {
         const input = e.target as HTMLInputElement;
         const caretPos = input.selectionStart ?? 0;
+        const prevChar = input.value[caretPos - 1];
+        const nextChar = input.value[caretPos];
         if (e.key == 'Backspace') {
-          if (caretPos > 0) {
-            const prevChar = input.value[caretPos - 1]!;
-            if (!allExtraChars.includes(prevChar)) {
-              return;
-            } else {
-              setCaretPosition(caretPos - 1);
-            }
+          if (
+            (value < 1 ||
+              caretPos == input.value.length - 1 ||
+              caretPos == input.value.length) &&
+            prevChar == '0'
+          ) {
+            setCaretPosition(caretPos - 1);
+            e.preventDefault();
+            return;
           }
+
+          if (prevChar && !allExtraChars.includes(prevChar)) {
+            return;
+          } else {
+            setCaretPosition(caretPos - 1);
+          }
+
           e.preventDefault();
           return;
         }
         if (e.key == 'Delete') {
+          if (
+            (value < 1 ||
+              caretPos == input.value.length - 2 ||
+              caretPos == input.value.length - 1) &&
+            nextChar == '0'
+          ) {
+            setCaretPosition(caretPos + 1);
+            e.preventDefault();
+            return;
+          }
+
+          if (nextChar && !allExtraChars.includes(nextChar)) {
+            return;
+          } else {
+            setCaretPosition(caretPos + 1);
+          }
+
           e.preventDefault();
           return;
         }
+
+        if (e.key == decimal) {
+          setCaretPosition(input.value.length - 2);
+          e.preventDefault();
+          return;
+        }
+
         if (allExtraChars.includes(e.key)) {
+          setCaretPosition(caretPos + 1);
+          e.preventDefault();
+          return;
+        }
+
+        if (
+          e.key == '0' &&
+          nextChar == '0' &&
+          caretPos == input.value.length - 2
+        ) {
           setCaretPosition(caretPos + 1);
           e.preventDefault();
           return;
@@ -93,28 +138,23 @@ export function BigNumberInput({
       }}
       onChange={(e) => {
         const escapedDecimal = escapeRegex(decimal);
-        const dotsCount = (
+        const decimalsCount = (
           e.target.value.match(new RegExp(escapedDecimal, 'g')) ?? []
         ).length;
-        if (dotsCount != 1) {
+        if (decimalsCount != 1) {
           onValueChange(value);
           return;
         }
 
-        const escapedGroup = escapeRegex(group);
-        const groupsCount = (
-          e.target.value.match(new RegExp(escapedGroup, 'g')) ?? []
-        ).length;
-        const oldGroupsCount = (
-          stringValue.match(new RegExp(escapedGroup, 'g')) ?? []
-        ).length;
-        if (groupsCount > oldGroupsCount) {
-          setCaretPosition(e.target.selectionStart ?? 0);
-        }
-
-        let newValue = parseFloat(e.target.value.replace(/[^0-9.-]+/g, ''));
+        let newValue = parseFloat(
+          e.target.value.replace(
+            new RegExp(`[^0-9${escapedDecimal}]`, 'g'),
+            '',
+          ),
+        );
         newValue = isNaN(newValue) ? 0 : newValue;
         newValue = Math.floor(newValue * 100) / 100;
+
         setCaretPosition(e.target.selectionStart ?? 0);
 
         if (value < 1 && newValue > 1) {
