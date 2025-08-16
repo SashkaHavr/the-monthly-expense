@@ -32,7 +32,7 @@ export function MoneyInput({
   const escapedDecimal = escapeRegex(decimal);
   const allExtraChars = [currency, decimal];
 
-  const stringValue = format.number(value, {
+  const stringValue = format.number(value / 100, {
     style: 'currency',
     currency: 'EUR',
     useGrouping: false,
@@ -166,14 +166,19 @@ export function MoneyInput({
           ),
         );
         newValue = isNaN(newValue) ? 0 : newValue;
-        newValue = Math.floor(newValue * 100) / 100;
+        newValue = Math.floor(newValue * 100);
 
-        setCaretPosition(e.target.selectionStart ?? 0);
+        let newCaretPosition = e.target.selectionStart ?? 0;
 
-        if (value < 1 && newValue > 1) {
+        // Handle 0 in integer part
+        if (value < 1 && newValue >= 1000) {
           newValue =
             Math.floor(newValue / 10) + (newValue - Math.floor(newValue));
+        } else if (value < 1 && newValue >= 1) {
+          newCaretPosition -= 1;
         }
+
+        setCaretPosition(newCaretPosition);
 
         onValueChange(newValue);
       }}

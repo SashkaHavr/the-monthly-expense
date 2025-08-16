@@ -51,7 +51,7 @@ function RouteComponent() {
     validationLogic: revalidateLogic(),
     validators: {
       onDynamic: z.object({
-        amount: z.number().gt(0),
+        amount: z.int().gt(0),
         month: z.string(),
         description: z.string(),
       }),
