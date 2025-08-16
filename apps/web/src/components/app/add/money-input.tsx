@@ -7,14 +7,14 @@ function escapeRegex(string: string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-export function BigNumberInput({
+export function MoneyInput({
   className,
   value,
   onValueChange,
   ...props
 }: Omit<
   React.ComponentProps<'input'>,
-  'value' | 'onValueChange' | 'type' | 'pattern'
+  'value' | 'onChange' | 'type' | 'pattern'
 > & {
   value: number;
   onValueChange: (value: number) => void;
@@ -29,6 +29,7 @@ export function BigNumberInput({
 
   const currency = parts.find((part) => part.type == 'currency')?.value ?? '';
   const decimal = parts.find((part) => part.type == 'decimal')?.value ?? '';
+  const escapedDecimal = escapeRegex(decimal);
   const allExtraChars = [currency, decimal];
 
   const stringValue = format.number(value, {
@@ -60,14 +61,27 @@ export function BigNumberInput({
 
   return (
     <input
+      inputMode="decimal"
       ref={inputRef}
       value={stringValue}
       autoFocus
       type="text"
-      pattern="[0-9]*"
       data-slot="input"
+      className={cn(
+        className,
+        'w-80 text-center text-4xl font-bold outline-none',
+      )}
       onKeyDown={(e) => {
         const input = e.target as HTMLInputElement;
+
+        if (
+          /^\w$/.test(e.key) &&
+          new RegExp(`[^0-9${escapedDecimal}]`, 'g').test(e.key)
+        ) {
+          e.preventDefault();
+          return;
+        }
+
         const caretPos = input.selectionStart ?? 0;
         const prevChar = input.value[caretPos - 1];
         const nextChar = input.value[caretPos];
@@ -137,7 +151,6 @@ export function BigNumberInput({
         }
       }}
       onChange={(e) => {
-        const escapedDecimal = escapeRegex(decimal);
         const decimalsCount = (
           e.target.value.match(new RegExp(escapedDecimal, 'g')) ?? []
         ).length;
@@ -164,7 +177,6 @@ export function BigNumberInput({
 
         onValueChange(newValue);
       }}
-      className={cn(className, 'text-center text-4xl font-bold outline-none')}
       {...props}
     />
   );

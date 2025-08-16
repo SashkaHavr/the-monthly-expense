@@ -1,10 +1,8 @@
-import { revalidateLogic, useForm } from '@tanstack/react-form';
+import { revalidateLogic } from '@tanstack/react-form';
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import z from 'zod';
 
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-
+import { useAppForm } from '~/components/form/use-app-form';
 import { authClient } from '~/lib/auth';
 
 export const Route = createFileRoute('/{-$locale}/')({
@@ -17,7 +15,7 @@ export const Route = createFileRoute('/{-$locale}/')({
 });
 
 function RouteComponent() {
-  const loginForm = useForm({
+  const loginForm = useAppForm({
     defaultValues: { email: 'user@example.com' },
     validationLogic: revalidateLogic(),
     validators: {
@@ -39,27 +37,12 @@ function RouteComponent() {
           void loginForm.handleSubmit();
         }}
       >
-        <loginForm.Field
-          name="email"
-          children={(field) => (
-            <Input
-              placeholder="user@example.com"
-              id={field.name}
-              name={field.name}
-              value={field.state.value}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-            />
-          )}
-        />
-        <loginForm.Subscribe
-          selector={(state) => [state.canSubmit, state.isSubmitting]}
-          children={([canSubmit, isSubmitting]) => (
-            <Button type="submit" disabled={!canSubmit}>
-              {isSubmitting ? '...' : 'Login'}
-            </Button>
-          )}
-        />
+        <loginForm.AppField name="email">
+          {(field) => <field.FormEmailInput />}
+        </loginForm.AppField>
+        <loginForm.AppForm>
+          <loginForm.FormSubmitButton label="Login" />
+        </loginForm.AppForm>
       </form>
     </div>
   );

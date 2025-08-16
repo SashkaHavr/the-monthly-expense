@@ -1,20 +1,14 @@
 // import { useState } from 'react';
-import { useState } from 'react';
+import { revalidateLogic } from '@tanstack/react-form';
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import { ArrowLeftIcon } from 'lucide-react';
 import { useFormatter } from 'use-intl';
+import z from 'zod';
 
 import { Button } from '~/components/ui/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '~/components/ui/select';
-import { Textarea } from '~/components/ui/textarea';
+import { SelectItem } from '~/components/ui/select';
 
-import { BigNumberInput } from '~/components/app/add/big-number-input';
+import { useAppForm } from '~/components/form/use-app-form';
 
 export const Route = createFileRoute(
   '/{-$locale}/app/add/$category/$subcategory/',
@@ -48,11 +42,24 @@ function RouteComponent() {
     };
   });
 
-  const [selectedMonth, setSelectedMonth] = useState(
-    twelvePastMonths[0]?.timestamp ?? '',
-  );
-
-  const [amount, setAmount] = useState(0);
+  const dataForm = useAppForm({
+    defaultValues: {
+      amount: 0,
+      month: twelvePastMonths[0]?.timestamp ?? '',
+      description: '',
+    },
+    validationLogic: revalidateLogic(),
+    validators: {
+      onDynamic: z.object({
+        amount: z.number().gt(0),
+        month: z.string(),
+        description: z.string(),
+      }),
+      onSubmit: ({ value }) => {
+        console.dir(value, { depth: null });
+      },
+    },
+  });
 
   return (
     <div className="flex flex-col px-8">
@@ -65,32 +72,40 @@ function RouteComponent() {
       </div>
       <div className="flex flex-col gap-8">
         <h1 className="text-center text-2xl font-bold">Enter Details</h1>
-        <div className="flex flex-col gap-6">
-          <BigNumberInput
-            className="self-center"
-            value={amount}
-            onValueChange={setAmount}
-          />
-          <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select a month">
-                {
-                  twelvePastMonths.find(
-                    (month) => month.timestamp === selectedMonth,
-                  )?.formattedStr
+        <form
+          className="flex flex-col gap-6"
+          onSubmit={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            void dataForm.handleSubmit();
+          }}
+        >
+          <dataForm.AppField name="amount">
+            {(field) => <field.FormMoneyInput className="self-center" />}
+          </dataForm.AppField>
+          <dataForm.AppField name="month">
+            {(field) => (
+              <field.FormSelect
+                valueDisplay={(value) =>
+                  twelvePastMonths.find((m) => m.timestamp === value)
+                    ?.formattedStr
                 }
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              {twelvePastMonths.map((month) => (
-                <SelectItem key={month.timestamp} value={month.timestamp}>
-                  {month.formattedStr}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Textarea placeholder="Description" />
-        </div>
+              >
+                {twelvePastMonths.map((month) => (
+                  <SelectItem key={month.timestamp} value={month.timestamp}>
+                    {month.formattedStr}
+                  </SelectItem>
+                ))}
+              </field.FormSelect>
+            )}
+          </dataForm.AppField>
+          <dataForm.AppField name="description">
+            {(field) => <field.FormTextarea placeholder="Description" />}
+          </dataForm.AppField>
+          <dataForm.AppForm>
+            <dataForm.FormSubmitButton label="Add" />
+          </dataForm.AppForm>
+        </form>
       </div>
     </div>
   );
