@@ -1,14 +1,11 @@
-// import { useState } from 'react';
-import { revalidateLogic } from '@tanstack/react-form';
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import { ArrowLeftIcon } from 'lucide-react';
-import { useFormatter } from 'use-intl';
 import z from 'zod';
 
 import { Button } from '~/components/ui/button';
-import { SelectItem } from '~/components/ui/select';
 
 import { useAppForm } from '~/components/form/use-app-form';
+import { getCurrentMonth } from '~/utils/month';
 
 export const Route = createFileRoute(
   '/{-$locale}/app/add/$category/$subcategory/',
@@ -28,36 +25,30 @@ export const Route = createFileRoute(
   component: RouteComponent,
 });
 
+const formSchema = z.object({
+  amount: z.int().positive(),
+  month: z.string(),
+  description: z.string(),
+});
+
 function RouteComponent() {
-  const format = useFormatter();
+  const currentMonthTimestamp = getCurrentMonth().getTime().toString();
 
-  const twelvePastMonths = Array.from({ length: 12 }, (_, i) => {
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    now.setDate(1);
-    now.setMonth(now.getMonth() - i);
-    return {
-      timestamp: now.getTime().toString(),
-      formattedStr: format.dateTime(now, 'monthYear'),
-    };
-  });
-
-  const dataForm = useAppForm({
+  const form = useAppForm({
     defaultValues: {
       amount: 0,
-      month: twelvePastMonths[0]?.timestamp ?? '',
+      month: currentMonthTimestamp,
       description: '',
     },
-    validationLogic: revalidateLogic(),
+    defaultState: {
+      isValid: false,
+    },
     validators: {
-      onDynamic: z.object({
-        amount: z.int().gt(0),
-        month: z.string(),
-        description: z.string(),
-      }),
-      onSubmit: ({ value }) => {
-        console.dir(value, { depth: null });
-      },
+      onChange: formSchema,
+      onMount: formSchema,
+    },
+    onSubmit: ({ value }) => {
+      console.dir(value, { depth: null });
     },
   });
 
@@ -77,34 +68,21 @@ function RouteComponent() {
           onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            void dataForm.handleSubmit();
+            void form.handleSubmit();
           }}
         >
-          <dataForm.AppField name="amount">
+          <form.AppField name="amount">
             {(field) => <field.FormMoneyInput className="self-center" />}
-          </dataForm.AppField>
-          <dataForm.AppField name="month">
-            {(field) => (
-              <field.FormSelect
-                valueDisplay={(value) =>
-                  twelvePastMonths.find((m) => m.timestamp === value)
-                    ?.formattedStr
-                }
-              >
-                {twelvePastMonths.map((month) => (
-                  <SelectItem key={month.timestamp} value={month.timestamp}>
-                    {month.formattedStr}
-                  </SelectItem>
-                ))}
-              </field.FormSelect>
-            )}
-          </dataForm.AppField>
-          <dataForm.AppField name="description">
+          </form.AppField>
+          <form.AppField name="month">
+            {(field) => <field.FormMonthSelect />}
+          </form.AppField>
+          <form.AppField name="description">
             {(field) => <field.FormTextarea placeholder="Description" />}
-          </dataForm.AppField>
-          <dataForm.AppForm>
-            <dataForm.FormSubmitButton label="Add" />
-          </dataForm.AppForm>
+          </form.AppField>
+          <form.AppForm>
+            <form.FormSubmitButton label="Add" defaultInvalid />
+          </form.AppForm>
         </form>
       </div>
     </div>

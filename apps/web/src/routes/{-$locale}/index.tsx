@@ -15,7 +15,7 @@ export const Route = createFileRoute('/{-$locale}/')({
 });
 
 function RouteComponent() {
-  const loginForm = useAppForm({
+  const form = useAppForm({
     defaultValues: { email: 'user@example.com' },
     validationLogic: revalidateLogic(),
     validators: {
@@ -34,15 +34,15 @@ function RouteComponent() {
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          void loginForm.handleSubmit();
+          void form.handleSubmit();
         }}
       >
-        <loginForm.AppField name="email">
+        <form.AppField name="email">
           {(field) => <field.FormEmailInput />}
-        </loginForm.AppField>
-        <loginForm.AppForm>
-          <loginForm.FormSubmitButton label="Login" />
-        </loginForm.AppForm>
+        </form.AppField>
+        <form.AppForm>
+          <form.FormSubmitButton label="Login" />
+        </form.AppForm>
       </form>
     </div>
   );
