@@ -1,6 +1,6 @@
 import { useFormatter } from 'use-intl';
 
-import { getCurrentMonth } from '~/utils/month';
+import { getCurrentMonth, getMonthISOString } from '~/utils/month';
 import {
   Select,
   SelectContent,
@@ -17,7 +17,7 @@ export function FormMonthSelect() {
     const month = new Date(currentMonth);
     month.setMonth(month.getMonth() - i);
     return {
-      timestamp: month.getTime().toString(),
+      iso: getMonthISOString(month),
       formattedStr: format.dateTime(month, 'monthYear'),
     };
   });
@@ -36,14 +36,14 @@ export function FormMonthSelect() {
       >
         <SelectValue placeholder="Select a month">
           {
-            twelvePastMonths.find((m) => m.timestamp === field.state.value)
+            twelvePastMonths.find((m) => m.iso === field.state.value)
               ?.formattedStr
           }
         </SelectValue>
       </SelectTrigger>
       <SelectContent>
         {twelvePastMonths.map((month) => (
-          <SelectItem key={month.timestamp} value={month.timestamp}>
+          <SelectItem key={month.iso} value={month.iso}>
             {month.formattedStr}
           </SelectItem>
         ))}

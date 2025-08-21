@@ -44,11 +44,14 @@ catalogs:
       specifier: ^8.15.5
       version: 8.15.5
     drizzle-kit:
-      specifier: 1.0.0-beta.1-c0277c0
-      version: 1.0.0-beta.1-c0277c0
+      specifier: beta
+      version: 1.0.0-beta.1-84d9a79
     drizzle-orm:
-      specifier: 1.0.0-beta.1-c0277c0
-      version: 1.0.0-beta.1-c0277c0
+      specifier: beta
+      version: 1.0.0-beta.1-84d9a79
+    drizzle-seed:
+      specifier: beta
+      version: 0.3.1-84d9a79
     pg:
       specifier: ^8.16.3
       version: 8.16.3
@@ -172,6 +175,9 @@ importers:
       '@the-monthly-sum/trpc':
         specifier: workspace:*
         version: link:../../packages/trpc
+      '@the-monthly-sum/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       '@trpc/client':
         specifier: catalog:trpc
         version: 11.4.4(@trpc/server@11.4.4(typescript@5.8.3))(typescript@5.8.3)
@@ -285,12 +291,18 @@ importers:
       '@the-monthly-sum/env':
         specifier: workspace:*
         version: link:../env
+      '@the-monthly-sum/utils':
+        specifier: workspace:*
+        version: link:../utils
       drizzle-kit:
         specifier: catalog:drizzle
-        version: 1.0.0-beta.1-c0277c0
+        version: 1.0.0-beta.1-84d9a79
       drizzle-orm:
         specifier: catalog:drizzle
-        version: 1.0.0-beta.1-c0277c0(@types/pg@8.15.5)(bun-types@1.2.20(@types/react@19.1.10))(kysely@0.28.5)(pg@8.16.3)
+        version: 1.0.0-beta.1-84d9a79(@types/pg@8.15.5)(bun-types@1.2.20(@types/react@19.1.10))(kysely@0.28.5)(pg@8.16.3)
+      drizzle-seed:
+        specifier: catalog:drizzle
+        version: 0.3.1-84d9a79(drizzle-orm@1.0.0-beta.1-84d9a79(@types/pg@8.15.5)(bun-types@1.2.20(@types/react@19.1.10))(kysely@0.28.5)(pg@8.16.3))
       pg:
         specifier: catalog:drizzle
         version: 8.16.3
@@ -375,12 +387,15 @@ importers:
       '@the-monthly-sum/env':
         specifier: workspace:*
         version: link:../env
+      '@the-monthly-sum/utils':
+        specifier: workspace:*
+        version: link:../utils
       '@trpc/server':
         specifier: catalog:trpc
         version: 11.4.4(typescript@5.8.3)
       drizzle-orm:
         specifier: catalog:drizzle
-        version: 1.0.0-beta.1-c0277c0(@types/pg@8.15.5)(bun-types@1.2.20(@types/react@19.1.10))(kysely@0.28.5)(pg@8.16.3)
+        version: 1.0.0-beta.1-84d9a79(@types/pg@8.15.5)(bun-types@1.2.20(@types/react@19.1.10))(kysely@0.28.5)(pg@8.16.3)
       superjson:
         specifier: 'catalog:'
         version: 2.2.2
@@ -397,6 +412,31 @@ importers:
       '@the-monthly-sum/typescript-config':
         specifier: workspace:*
         version: link:../../tools/typescript-config
+      '@types/bun':
+        specifier: 'catalog:'
+        version: 1.2.20(@types/react@19.1.10)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.3
+
+  packages/utils:
+    dependencies:
+      zod:
+        specifier: 'catalog:'
+        version: 4.0.17
+    devDependencies:
+      '@the-monthly-sum/eslint-config':
+        specifier: workspace:*
+        version: link:../../tools/eslint-config
+      '@the-monthly-sum/prettier-config':
+        specifier: workspace:*
+        version: link:../../tools/prettier-config
+      '@the-monthly-sum/typescript-config':
+        specifier: workspace:*
+        version: link:../../tools/typescript-config
+      '@trpc/server':
+        specifier: catalog:trpc
+        version: 11.4.4(typescript@5.8.3)
       '@types/bun':
         specifier: 'catalog:'
         version: 1.2.20(@types/react@19.1.10)
@@ -2908,12 +2948,12 @@ packages:
     resolution: {integrity: sha512-kQhDYKZecqnM0fCnzI5eIv5L4cAe/iRI+HqMbO/hbRdTAeXDG+M9FjipUxNfbARuEg4iHIbhnhs78BCHNbSxEQ==}
     engines: {node: '>=12'}
 
-  drizzle-kit@1.0.0-beta.1-c0277c0:
-    resolution: {integrity: sha512-8oRt69AyPA1ONsI1/2nZCJGkp9egyQOOe/uBuNB8yxcWxIMCDI60OF4rLHUaYfpHP4zuqJwiABFIBQUViPxXTw==}
+  drizzle-kit@1.0.0-beta.1-84d9a79:
+    resolution: {integrity: sha512-4YePwJiu06xyP1hMbq6LtD7sSN0BhRGNxU19WLNJj+P4DHzpn6Wr9NKFzyf8bWMM30YhpSX++JTVkDfGI6WRxw==}
     hasBin: true
 
-  drizzle-orm@1.0.0-beta.1-c0277c0:
-    resolution: {integrity: sha512-4XnmY3CdFHUzJpbRwc6mElkpDzyZs8Ko98i+cRuuPlakFgZqItr+inoK0bFTH50Eh66E/UXbxfAW6U0JK/1wyw==}
+  drizzle-orm@1.0.0-beta.1-84d9a79:
+    resolution: {integrity: sha512-Y7ip23K7vP8Nk+fm5mRvKYuUjwVXdtLRI3Qv0maIwoY/b2R1HYkCgSw47tFAXasRbVnrNkU7AIj/VI9J3uQ77w==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=4'
@@ -2929,6 +2969,7 @@ packages:
       '@types/better-sqlite3': '*'
       '@types/pg': '*'
       '@types/sql.js': '*'
+      '@upstash/redis': '>=1.34.7'
       '@vercel/postgres': '>=0.8.0'
       '@xata.io/client': '*'
       better-sqlite3: '>=9.3.0'
@@ -2972,6 +3013,8 @@ packages:
         optional: true
       '@types/sql.js':
         optional: true
+      '@upstash/redis':
+        optional: true
       '@vercel/postgres':
         optional: true
       '@xata.io/client':
@@ -2999,6 +3042,14 @@ packages:
       sql.js:
         optional: true
       sqlite3:
+        optional: true
+
+  drizzle-seed@0.3.1-84d9a79:
+    resolution: {integrity: sha512-OiTmsYU1WbQ47n2GJV/erAc8vK73Y3UlVb3AAa+mg3n1BKX/gQDDjdQc4bmPOI7eeNpjO8bTTlXiNcQcAb/Stg==}
+    peerDependencies:
+      drizzle-orm: '>=0.36.4'
+    peerDependenciesMeta:
+      drizzle-orm:
         optional: true
 
   dunder-proto@1.0.1:
@@ -4297,6 +4348,9 @@ packages:
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
+
+  pure-rand@6.1.0:
+    resolution: {integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==}
 
   pvtsutils@1.3.6:
     resolution: {integrity: sha512-PLgQXQ6H2FWCaeRak8vvk1GW462lMxB5s3Jm673N82zI4vqtVUPuZdffdZbPDFRoU8kAhItWFtPCWiPpp4/EDg==}
@@ -7687,7 +7741,7 @@ snapshots:
 
   dotenv@17.2.1: {}
 
-  drizzle-kit@1.0.0-beta.1-c0277c0:
+  drizzle-kit@1.0.0-beta.1-84d9a79:
     dependencies:
       '@drizzle-team/brocli': 0.10.2
       '@esbuild-kit/esm-loader': 2.6.5
@@ -7696,12 +7750,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@1.0.0-beta.1-c0277c0(@types/pg@8.15.5)(bun-types@1.2.20(@types/react@19.1.10))(kysely@0.28.5)(pg@8.16.3):
+  drizzle-orm@1.0.0-beta.1-84d9a79(@types/pg@8.15.5)(bun-types@1.2.20(@types/react@19.1.10))(kysely@0.28.5)(pg@8.16.3):
     optionalDependencies:
       '@types/pg': 8.15.5
       bun-types: 1.2.20(@types/react@19.1.10)
       kysely: 0.28.5
       pg: 8.16.3
+
+  drizzle-seed@0.3.1-84d9a79(drizzle-orm@1.0.0-beta.1-84d9a79(@types/pg@8.15.5)(bun-types@1.2.20(@types/react@19.1.10))(kysely@0.28.5)(pg@8.16.3)):
+    dependencies:
+      pure-rand: 6.1.0
+    optionalDependencies:
+      drizzle-orm: 1.0.0-beta.1-84d9a79(@types/pg@8.15.5)(bun-types@1.2.20(@types/react@19.1.10))(kysely@0.28.5)(pg@8.16.3)
 
   dunder-proto@1.0.1:
     dependencies:
@@ -9049,6 +9109,8 @@ snapshots:
       once: 1.4.0
 
   punycode@2.3.1: {}
+
+  pure-rand@6.1.0: {}
 
   pvtsutils@1.3.6:
     dependencies:

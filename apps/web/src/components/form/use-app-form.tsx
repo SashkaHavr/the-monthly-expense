@@ -1,6 +1,7 @@
 import { createFormHook } from '@tanstack/react-form';
 
 import { fieldContext, formContext } from './form-context';
+import { FormCurrencySelect } from './form-currency-select';
 import { FormEmailInput } from './form-email-input';
 import { FormMoneyInput } from './form-money-input';
 import { FormMonthSelect } from './form-month-select';
@@ -16,6 +17,7 @@ export const { useAppForm } = createFormHook({
     FormMoneyInput,
     FormTextarea,
     FormMonthSelect,
+    FormCurrencySelect,
   },
   formComponents: { FormSubmitButton },
 });

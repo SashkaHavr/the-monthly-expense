@@ -9,12 +9,18 @@ import {
 import { ScrollArea } from '~/components/ui/scroll-area';
 
 import { BottomNav, BottomNavItem } from '~/components/bottom-nav';
+import { getCategoriesServerFn } from '~/lib/trpc-server';
 
 export const Route = createFileRoute('/{-$locale}/app')({
-  beforeLoad: ({ context }) => {
-    if (!context.auth.loggedIn) {
+  beforeLoad: async ({ context: { queryClient, trpc, auth } }) => {
+    if (!auth.loggedIn || !auth.session.activeOrganizationId) {
       throw redirect({ to: '/{-$locale}' });
     }
+    const categories = await queryClient.ensureQueryData({
+      queryKey: trpc.expense.getCategories.queryKey(),
+      queryFn: () => getCategoriesServerFn(),
+    });
+    return { categories: categories.categories };
   },
   component: RouteComponent,
 });

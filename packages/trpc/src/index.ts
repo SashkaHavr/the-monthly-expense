@@ -3,11 +3,15 @@ import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
 
 import { createContext } from '#context.ts';
 import { createCallerFactory, publicProcedure, router } from '#init.ts';
+import { budgetRouter } from '#routers/budget.ts';
 import { configRouter } from '#routers/config.ts';
+import { expenseRouter } from '#routers/expense.ts';
 
 const appRouter = router({
   health: publicProcedure.query(() => 'tRPC healthy!'),
   config: configRouter,
+  budget: budgetRouter,
+  expense: expenseRouter,
 });
 
 export function trpcHandler({ request }: { request: Request }) {

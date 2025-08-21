@@ -21,6 +21,7 @@
     "@the-monthly-sum/auth": "workspace:*",
     "@the-monthly-sum/db": "workspace:*",
     "@the-monthly-sum/env": "workspace:*",
+    "@the-monthly-sum/utils": "workspace:*",
     "@trpc/server": "catalog:trpc",
     "drizzle-orm": "catalog:drizzle",
     "superjson": "catalog:",

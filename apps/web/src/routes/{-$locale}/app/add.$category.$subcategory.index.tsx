@@ -1,18 +1,30 @@
-import { createFileRoute, redirect } from '@tanstack/react-router';
+import { useMutation } from '@tanstack/react-query';
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { ArrowLeftIcon } from 'lucide-react';
 import z from 'zod';
 
+import { subcategorySlugs } from '@the-monthly-sum/utils/categories';
+import { expenseSchema } from '@the-monthly-sum/utils/schemas';
 import { Button } from '~/components/ui/button';
 
 import { useAppForm } from '~/components/form/use-app-form';
-import { getCurrentMonth } from '~/utils/month';
+import { useTRPC } from '~/lib/trpc';
+import { getCurrentMonth, getMonthISOString } from '~/utils/month';
 
 export const Route = createFileRoute(
   '/{-$locale}/app/add/$category/$subcategory/',
 )({
+  params: {
+    parse: (rawParams) =>
+      z
+        .object({
+          subcategory: z.enum(subcategorySlugs),
+        })
+        .parse(rawParams),
+  },
   beforeLoad: ({ params, context }) => {
     const subcategory = context.category.subcategories.find(
-      (c) => c.id == params.subcategory,
+      (c) => c.slug == params.subcategory,
     );
     if (!subcategory) {
       throw redirect({
@@ -25,30 +37,42 @@ export const Route = createFileRoute(
   component: RouteComponent,
 });
 
-const formSchema = z.object({
-  amount: z.int().positive(),
-  month: z.string(),
-  description: z.string(),
-});
-
 function RouteComponent() {
-  const currentMonthTimestamp = getCurrentMonth().getTime().toString();
+  const trpc = useTRPC();
+  const navigate = useNavigate();
+  const subcategory = Route.useRouteContext({
+    select: (s) => s.subcategory,
+  });
+
+  const createExpense = useMutation(
+    trpc.expense.create.mutationOptions({
+      onMutate: async () => {
+        await navigate({ to: '/{-$locale}/app' });
+      },
+      onSuccess: async () => {
+        // TODO: Invalidate queries
+      },
+    }),
+  );
 
   const form = useAppForm({
     defaultValues: {
       amount: 0,
-      month: currentMonthTimestamp,
+      month: getMonthISOString(getCurrentMonth()),
       description: '',
     },
     defaultState: {
       isValid: false,
     },
     validators: {
-      onChange: formSchema,
-      onMount: formSchema,
+      onChange: expenseSchema,
+      onMount: expenseSchema,
     },
-    onSubmit: ({ value }) => {
-      console.dir(value, { depth: null });
+    onSubmit: async ({ value }) => {
+      await createExpense.mutateAsync({
+        ...value,
+        subcategorySlug: subcategory.slug,
+      });
     },
   });
 

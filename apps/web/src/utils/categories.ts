@@ -6,86 +6,111 @@ import {
   ShoppingCart,
 } from 'lucide-react';
 
-export const categories: Category[] = [
-  {
-    id: 'housing',
-    name: 'Housing & Utilities',
-    color: 'bg-blue-500',
-    subcategories: [
-      { id: 'rent', name: 'Rent/Mortgage' },
-      { id: 'utilities', name: 'Utilities' },
-      { id: 'internet', name: 'Internet & Phone' },
-      { id: 'maintenance', name: 'Maintenance' },
-      { id: 'furniture', name: 'Furniture' },
-    ],
-  },
-  {
-    id: 'daily',
-    name: 'Daily Spending',
-    color: 'bg-purple-500',
-    subcategories: [
-      { id: 'groceries', name: 'Groceries' },
-      { id: 'dining', name: 'Dining Out' },
-      { id: 'transportation', name: 'Transportation' },
-      { id: 'shopping', name: 'Shopping' },
-      { id: 'entertainment', name: 'Entertainment' },
-      { id: 'personal-care', name: 'Personal Care' },
-    ],
-  },
-  {
-    id: 'financial',
-    name: 'Financial & Savings',
-    color: 'bg-green-500',
-    subcategories: [
-      { id: 'savings', name: 'Savings' },
-      { id: 'investments', name: 'Investments' },
-      { id: 'loan-repayments', name: 'Loan Repayments' },
-      { id: 'bank-fees', name: 'Bank Fees' },
-    ],
-  },
-  {
-    id: 'insurance',
-    name: 'Insurance & Health',
-    color: 'bg-red-500',
-    subcategories: [
-      { id: 'health-insurance', name: 'Health Insurance' },
-      { id: 'car-insurance', name: 'Car Insurance' },
-      { id: 'home-insurance', name: 'Home Insurance' },
-      { id: 'medical', name: 'Medical' },
-    ],
-  },
-  {
-    id: 'income',
-    name: 'Income',
-    color: 'bg-emerald-500',
-    subcategories: [
-      { id: 'salary', name: 'Salary/Wages' },
-      { id: 'freelance', name: 'Freelance' },
-      { id: 'gifts', name: 'Gifts' },
-      { id: 'other', name: 'Other' },
-    ],
-  },
-];
+import type {
+  CategorySlug,
+  SubcategorySlug,
+} from '@the-monthly-sum/utils/categories';
 
-export const categoryIcons: Record<
-  string,
-  React.ComponentType<{ className?: string; size?: number }>
+export const categoryInfo: Record<
+  CategorySlug,
+  {
+    name: string;
+    color: string;
+    icon: React.ComponentType<{ className?: string; size?: number }>;
+  }
 > = {
-  housing: Home,
-  daily: ShoppingCart,
-  financial: PiggyBank,
-  insurance: Shield,
-  income: DollarSign,
+  housing: { name: 'Housing', color: 'bg-red-500', icon: Home },
+  daily: { name: 'Daily', color: 'bg-blue-500', icon: ShoppingCart },
+  financial: { name: 'Financial', color: 'bg-green-500', icon: PiggyBank },
+  insurance: { name: 'Insurance', color: 'bg-yellow-500', icon: Shield },
+  income: { name: 'Income', color: 'bg-purple-500', icon: DollarSign },
 };
 
-export interface Category {
-  id: string;
-  name: string;
-  color: string;
-  subcategories: { id: string; name: string }[];
-}
-
-export interface Subcategory {
-  id: string;
-  name: string;
-}
+export const subcategoryInfo: Record<
+  SubcategorySlug,
+  {
+    name: string;
+  }
+> = {
+  rent: {
+    name: 'Rent',
+  },
+  utilities: {
+    name: 'Utilities',
+  },
+  internet: {
+    name: 'Internet',
+  },
+  maintenance: {
+    name: 'Maintenance',
+  },
+  furniture: {
+    name: 'Furniture',
+  },
+  'housing-other': {
+    name: 'Other',
+  },
+  groceries: {
+    name: 'Groceries',
+  },
+  dining: {
+    name: 'Dining & Restaurants',
+  },
+  transportation: {
+    name: 'Transportation',
+  },
+  shopping: {
+    name: 'Shopping',
+  },
+  entertainment: {
+    name: 'Entertainment',
+  },
+  'personal-care': {
+    name: 'Personal Care',
+  },
+  medical: {
+    name: 'Medical & Health',
+  },
+  'daily-other': {
+    name: 'Other',
+  },
+  savings: {
+    name: 'Savings',
+  },
+  investments: {
+    name: 'Investments',
+  },
+  'loan-repayments': {
+    name: 'Loan Repayments',
+  },
+  'bank-fees': {
+    name: 'Bank Fees',
+  },
+  'financial-other': {
+    name: 'Other',
+  },
+  'health-insurance': {
+    name: 'Health Insurance',
+  },
+  'car-insurance': {
+    name: 'Car Insurance',
+  },
+  'home-insurance': {
+    name: 'Home Insurance',
+  },
+  'insurance-other': {
+    name: 'Other',
+  },
+  salary: {
+    name: 'Salary',
+  },
+  freelance: {
+    name: 'Freelance Income',
+  },
+  gifts: {
+    name: 'Gifts',
+  },
+  'income-other': {
+    name: 'Other',
+  },
+};

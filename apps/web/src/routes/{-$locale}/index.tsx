@@ -8,7 +8,11 @@ import { authClient } from '~/lib/auth';
 export const Route = createFileRoute('/{-$locale}/')({
   beforeLoad: ({ context }) => {
     if (context.auth.loggedIn) {
-      throw redirect({ to: '/{-$locale}/app' });
+      if (context.auth.session.activeOrganizationId) {
+        throw redirect({ to: '/{-$locale}/app' });
+      } else {
+        throw redirect({ to: '/{-$locale}/create-first-budget' });
+      }
     }
   },
   component: RouteComponent,

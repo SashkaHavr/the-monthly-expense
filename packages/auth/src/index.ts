@@ -1,8 +1,9 @@
 import { betterAuth, BetterAuthError } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { admin, magicLink } from 'better-auth/plugins';
+import { admin, magicLink, organization } from 'better-auth/plugins';
 
 import { db } from '@the-monthly-sum/db';
+import { profile as profileTable } from '@the-monthly-sum/db/schema';
 import { envAuth } from '@the-monthly-sum/env/auth';
 
 import { permissions } from '#permissions.ts';
@@ -18,6 +19,43 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: 'pg',
   }),
+  databaseHooks: {
+    user: {
+      create: {
+        after: async (user) => {
+          await db.insert(profileTable).values({
+            userId: user.id,
+            selectedBudget: null,
+          });
+        },
+      },
+    },
+    session: {
+      create: {
+        before: async (session) => {
+          const profile = await db.query.profile.findFirst({
+            where: {
+              userId: session.userId,
+            },
+            with: {
+              budget: true,
+            },
+          });
+
+          if (!profile?.budget) {
+            return;
+          }
+
+          return {
+            data: {
+              ...session,
+              activeOrganizationId: profile.budget.organizationId,
+            },
+          };
+        },
+      },
+    },
+  },
   rateLimit: {
     customRules: {
       '/sign-in/magic-link': {
@@ -42,5 +80,6 @@ export const auth = betterAuth({
     admin({
       ...permissions,
     }),
+    organization(),
   ],
 });

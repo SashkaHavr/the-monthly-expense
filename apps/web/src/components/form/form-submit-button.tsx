@@ -17,7 +17,6 @@ export function FormSubmitButton({
       }
     >
       {([canSubmit, isSubmitting, isDefaultValue]) => {
-        console.log(canSubmit);
         return (
           <Button
             type="submit"

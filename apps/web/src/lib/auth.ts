@@ -9,6 +9,7 @@ import {
   adminClient,
   inferAdditionalFields,
   magicLinkClient,
+  organizationClient,
 } from 'better-auth/client/plugins';
 import { createAuthClient } from 'better-auth/react';
 
@@ -28,6 +29,7 @@ export const authClient = createAuthClient({
     inferAdditionalFields<typeof auth>(),
     magicLinkClient(),
     adminClient(permissions),
+    organizationClient(),
   ],
   fetchOptions: { throw: true },
 });
@@ -66,6 +68,8 @@ export function useResetAuth() {
   const router = useRouter();
 
   return async () => {
+    await authClient.getSession({ query: { disableCookieCache: true } });
+
     await queryClient.resetQueries({ queryKey: [authBaseKey] });
     await router.invalidate();
   };

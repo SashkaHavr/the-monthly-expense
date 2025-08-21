@@ -13,6 +13,7 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as Char123LocaleChar125RouteRouteImport } from './routes/{-$locale}/route'
 import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
+import { Route as Char123LocaleChar125CreateFirstBudgetRouteImport } from './routes/{-$locale}/create-first-budget'
 import { Route as Char123LocaleChar125AppRouteRouteImport } from './routes/{-$locale}/app/route'
 import { Route as Char123LocaleChar125AppIndexRouteImport } from './routes/{-$locale}/app/index'
 import { Route as Char123LocaleChar125AppProfileRouteImport } from './routes/{-$locale}/app/profile'
@@ -37,6 +38,12 @@ const Char123LocaleChar125IndexRoute =
   Char123LocaleChar125IndexRouteImport.update({
     id: '/',
     path: '/',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125CreateFirstBudgetRoute =
+  Char123LocaleChar125CreateFirstBudgetRouteImport.update({
+    id: '/create-first-budget',
+    path: '/create-first-budget',
     getParentRoute: () => Char123LocaleChar125RouteRoute,
   } as any)
 const Char123LocaleChar125AppRouteRoute =
@@ -107,6 +114,7 @@ const AuthSplatServerRoute = AuthSplatServerRouteImport.update({
 export interface FileRoutesByFullPath {
   '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
   '/{-$locale}/app': typeof Char123LocaleChar125AppRouteRouteWithChildren
+  '/{-$locale}/create-first-budget': typeof Char123LocaleChar125CreateFirstBudgetRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
   '/{-$locale}/app/chat': typeof Char123LocaleChar125AppChatRoute
   '/{-$locale}/app/dashboard': typeof Char123LocaleChar125AppDashboardRoute
@@ -118,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/{-$locale}/app/add/$category/$subcategory': typeof Char123LocaleChar125AppAddCategorySubcategoryIndexRoute
 }
 export interface FileRoutesByTo {
+  '/{-$locale}/create-first-budget': typeof Char123LocaleChar125CreateFirstBudgetRoute
   '/{-$locale}': typeof Char123LocaleChar125IndexRoute
   '/{-$locale}/app/chat': typeof Char123LocaleChar125AppChatRoute
   '/{-$locale}/app/dashboard': typeof Char123LocaleChar125AppDashboardRoute
@@ -131,6 +140,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
   '/{-$locale}/app': typeof Char123LocaleChar125AppRouteRouteWithChildren
+  '/{-$locale}/create-first-budget': typeof Char123LocaleChar125CreateFirstBudgetRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
   '/{-$locale}/app/chat': typeof Char123LocaleChar125AppChatRoute
   '/{-$locale}/app/dashboard': typeof Char123LocaleChar125AppDashboardRoute
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/{-$locale}'
     | '/{-$locale}/app'
+    | '/{-$locale}/create-first-budget'
     | '/{-$locale}/'
     | '/{-$locale}/app/chat'
     | '/{-$locale}/app/dashboard'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/{-$locale}/app/add/$category/$subcategory'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/{-$locale}/create-first-budget'
     | '/{-$locale}'
     | '/{-$locale}/app/chat'
     | '/{-$locale}/app/dashboard'
@@ -169,6 +181,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/{-$locale}'
     | '/{-$locale}/app'
+    | '/{-$locale}/create-first-budget'
     | '/{-$locale}/'
     | '/{-$locale}/app/chat'
     | '/{-$locale}/app/dashboard'
@@ -223,6 +236,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/{-$locale}/'
       preLoaderRoute: typeof Char123LocaleChar125IndexRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
+    '/{-$locale}/create-first-budget': {
+      id: '/{-$locale}/create-first-budget'
+      path: '/create-first-budget'
+      fullPath: '/{-$locale}/create-first-budget'
+      preLoaderRoute: typeof Char123LocaleChar125CreateFirstBudgetRouteImport
       parentRoute: typeof Char123LocaleChar125RouteRoute
     }
     '/{-$locale}/app': {
@@ -355,6 +375,7 @@ const Char123LocaleChar125AppRouteRouteWithChildren =
 
 interface Char123LocaleChar125RouteRouteChildren {
   Char123LocaleChar125AppRouteRoute: typeof Char123LocaleChar125AppRouteRouteWithChildren
+  Char123LocaleChar125CreateFirstBudgetRoute: typeof Char123LocaleChar125CreateFirstBudgetRoute
   Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
 }
 
@@ -362,6 +383,8 @@ const Char123LocaleChar125RouteRouteChildren: Char123LocaleChar125RouteRouteChil
   {
     Char123LocaleChar125AppRouteRoute:
       Char123LocaleChar125AppRouteRouteWithChildren,
+    Char123LocaleChar125CreateFirstBudgetRoute:
+      Char123LocaleChar125CreateFirstBudgetRoute,
     Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,
   }
 

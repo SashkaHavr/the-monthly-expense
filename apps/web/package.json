@@ -28,6 +28,7 @@
     "@the-monthly-sum/auth": "workspace:*",
     "@the-monthly-sum/intl": "workspace:*",
     "@the-monthly-sum/trpc": "workspace:*",
+    "@the-monthly-sum/utils": "workspace:*",
     "@trpc/client": "catalog:trpc",
     "@trpc/tanstack-react-query": "catalog:trpc",
     "@vitejs/plugin-react": "catalog:vite",

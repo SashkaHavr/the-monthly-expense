@@ -10,7 +10,7 @@ export const Route = createFileRoute('/{-$locale}/app/add/$category/')({
 });
 
 function RouteComponent() {
-  const { category } = Route.useRouteContext();
+  const category = Route.useRouteContext({ select: (s) => s.category });
 
   return (
     <div className="flex flex-col px-8">
@@ -28,7 +28,7 @@ function RouteComponent() {
             <SubCategoryItem
               key={subcategory.id}
               subcategory={subcategory}
-              categoryId={category.id}
+              category={category}
             />
           ))}
         </div>

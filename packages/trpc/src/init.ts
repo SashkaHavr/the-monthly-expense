@@ -3,6 +3,7 @@ import superjson from 'superjson';
 import z, { ZodError } from 'zod';
 
 import { auth } from '@the-monthly-sum/auth';
+import { db } from '@the-monthly-sum/db';
 import { envServer } from '@the-monthly-sum/env/server';
 
 import type { Context } from '#context.ts';
@@ -62,6 +63,33 @@ export const protectedProcedure = publicProcedure.use(async ({ ctx, next }) => {
     },
   });
 });
+
+export const activeBudgetProcedure = protectedProcedure.use(
+  async ({ ctx, next }) => {
+    if (!ctx.session.session.activeOrganizationId) {
+      throw new TRPCError({
+        message: 'No active organization found',
+        code: 'UNPROCESSABLE_CONTENT',
+      });
+    }
+    const budget = await db.query.budget.findFirst({
+      where: { organizationId: ctx.session.session.activeOrganizationId },
+    });
+    if (!budget) {
+      throw new TRPCError({
+        message: 'No active budget found',
+        code: 'UNPROCESSABLE_CONTENT',
+      });
+    }
+    return next({
+      ctx: {
+        ...ctx,
+        session: ctx.session,
+        budgetId: budget.id,
+      },
+    });
+  },
+);
 
 export function adminProcedure(
   permission: NonNullable<
