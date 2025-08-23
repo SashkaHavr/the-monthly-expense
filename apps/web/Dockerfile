@@ -9,7 +9,7 @@ RUN bun install -g turbo
 FROM base AS turbo
 WORKDIR /app
 COPY . .
-RUN turbo prune @the-monthly-sum/web --docker
+RUN turbo prune @the-monthly-expense/web --docker
 
 # Install and build
 FROM base AS builder
@@ -26,7 +26,7 @@ RUN --mount=type=secret,id=TURBO_TEAM,env=TURBO_TEAM \
 FROM base AS turbo-db
 WORKDIR /app
 COPY . .
-RUN turbo prune @the-monthly-sum/db --docker
+RUN turbo prune @the-monthly-expense/db --docker
 
 # Install and build
 FROM base AS builder-db

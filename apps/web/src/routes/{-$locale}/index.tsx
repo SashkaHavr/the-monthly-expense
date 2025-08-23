@@ -32,7 +32,7 @@ function RouteComponent() {
 
   return (
     <div className="mx-auto flex max-w-100 flex-col gap-4 pt-20">
-      <h1 className="text-2xl font-bold">Welcome to The Monthly Sum!</h1>
+      <h1 className="text-2xl font-bold">Welcome to The Monthly Expense!</h1>
       <form
         className="flex flex-col gap-2"
         onSubmit={(e) => {

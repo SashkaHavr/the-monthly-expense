@@ -1,5 +1,5 @@
 {
-  "name": "@the-monthly-sum/db",
+  "name": "@the-monthly-expense/db",
   "private": true,
   "type": "module",
   "imports": {
@@ -13,26 +13,26 @@
     "clean": "git clean -xdf .turbo node_modules dist .tanstack .nitro .output",
     "db:push": "drizzle-kit push && bun ./src/init.ts",
     "db:studio": "drizzle-kit studio",
-    "db:up": "bun exec \"docker run -d --name pg-the-monthly-sum -e POSTGRES_PASSWORD=mysecretpassword -v pgdata-the-monthly-sum:/var/lib/postgresql/data -p 5432:5432 postgres && echo 'DATABASE_URL=postgresql://postgres:mysecretpassword@localhost:5432/postgres' > ./.env && pnpm db:push\"",
+    "db:up": "bun exec \"docker run -d --name pg-the-monthly-expense -e POSTGRES_PASSWORD=mysecretpassword -v pgdata-the-monthly-expense:/var/lib/postgresql/data -p 5432:5432 postgres && echo 'DATABASE_URL=postgresql://postgres:mysecretpassword@localhost:5432/postgres' > ./.env && pnpm db:push\"",
     "format": "prettier . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore --check",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "typecheck": "tsc --noEmit"
   },
-  "prettier": "@the-monthly-sum/prettier-config",
+  "prettier": "@the-monthly-expense/prettier-config",
   "dependencies": {
-    "@the-monthly-sum/env": "workspace:*",
-    "@the-monthly-sum/utils": "workspace:*",
+    "@the-monthly-expense/env": "workspace:*",
+    "@the-monthly-expense/utils": "workspace:*",
     "drizzle-kit": "catalog:drizzle",
     "drizzle-orm": "catalog:drizzle",
     "drizzle-seed": "catalog:drizzle",
     "pg": "catalog:drizzle"
   },
   "devDependencies": {
-    "@the-monthly-sum/eslint-config": "workspace:*",
-    "@the-monthly-sum/prettier-config": "workspace:*",
-    "@the-monthly-sum/typescript-config": "workspace:*",
+    "@the-monthly-expense/eslint-config": "workspace:*",
+    "@the-monthly-expense/prettier-config": "workspace:*",
+    "@the-monthly-expense/typescript-config": "workspace:*",
     "@types/bun": "catalog:",
     "@types/pg": "catalog:drizzle",
     "typescript": "catalog:"

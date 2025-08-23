@@ -11,7 +11,7 @@ import {
 import type {
   CategorySlug,
   SubcategorySlug,
-} from '@the-monthly-sum/utils/categories';
+} from '@the-monthly-expense/utils/categories';
 
 import { budget } from './budget';
 

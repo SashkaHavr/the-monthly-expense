@@ -2,9 +2,9 @@ import { initTRPC, TRPCError } from '@trpc/server';
 import superjson from 'superjson';
 import z, { ZodError } from 'zod';
 
-import { auth } from '@the-monthly-sum/auth';
-import { db } from '@the-monthly-sum/db';
-import { envServer } from '@the-monthly-sum/env/server';
+import { auth } from '@the-monthly-expense/auth';
+import { db } from '@the-monthly-expense/db';
+import { envServer } from '@the-monthly-expense/env/server';
 
 import type { Context } from '#context.ts';
 

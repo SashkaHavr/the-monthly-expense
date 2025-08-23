@@ -1,3 +1,3 @@
-import eslintConfig from '@the-monthly-sum/eslint-config';
+import eslintConfig from '@the-monthly-expense/eslint-config';
 
 export default [...eslintConfig];

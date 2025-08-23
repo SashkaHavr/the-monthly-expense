@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 
-import type { TRPCOutput } from '@the-monthly-sum/trpc';
+import type { TRPCOutput } from '@the-monthly-expense/trpc';
 import { Card } from '~/components/ui/card';
 
 import { subcategoryInfo } from '~/utils/categories';

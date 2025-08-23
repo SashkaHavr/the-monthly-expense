@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
 
-import { envDB } from '@the-monthly-sum/env/db';
+import { envDB } from '@the-monthly-expense/env/db';
 
 import { relations } from '#relations.ts';
 import * as schema from './schema';

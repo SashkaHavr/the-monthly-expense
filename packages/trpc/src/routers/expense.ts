@@ -1,10 +1,10 @@
 import { TRPCError } from '@trpc/server';
 import z from 'zod';
 
-import { db } from '@the-monthly-sum/db';
-import { expense as expenseTable } from '@the-monthly-sum/db/schema';
-import { subcategorySlugs } from '@the-monthly-sum/utils/categories';
-import { expenseSchema } from '@the-monthly-sum/utils/schemas';
+import { db } from '@the-monthly-expense/db';
+import { expense as expenseTable } from '@the-monthly-expense/db/schema';
+import { subcategorySlugs } from '@the-monthly-expense/utils/categories';
+import { expenseSchema } from '@the-monthly-expense/utils/schemas';
 
 import { activeBudgetProcedure, protectedProcedure, router } from '#init.ts';
 

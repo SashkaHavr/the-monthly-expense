@@ -13,13 +13,13 @@ import {
 } from 'better-auth/client/plugins';
 import { createAuthClient } from 'better-auth/react';
 
-import type { auth } from '@the-monthly-sum/auth';
-import type { Role } from '@the-monthly-sum/auth/permissions';
+import type { auth } from '@the-monthly-expense/auth';
+import type { Role } from '@the-monthly-expense/auth/permissions';
 import {
   getRoles,
   isRoleArray,
   permissions,
-} from '@the-monthly-sum/auth/permissions';
+} from '@the-monthly-expense/auth/permissions';
 
 import { getSessionServerFn } from './auth-server';
 

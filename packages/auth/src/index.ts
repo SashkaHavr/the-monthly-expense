@@ -2,9 +2,9 @@ import { betterAuth, BetterAuthError } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { admin, magicLink, organization } from 'better-auth/plugins';
 
-import { db } from '@the-monthly-sum/db';
-import { profile as profileTable } from '@the-monthly-sum/db/schema';
-import { envAuth } from '@the-monthly-sum/env/auth';
+import { db } from '@the-monthly-expense/db';
+import { profile as profileTable } from '@the-monthly-expense/db/schema';
+import { envAuth } from '@the-monthly-expense/env/auth';
 
 import { permissions } from '#permissions.ts';
 

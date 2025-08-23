@@ -9,7 +9,7 @@ import {
 import type {
   CategorySlug,
   SubcategorySlug,
-} from '@the-monthly-sum/utils/categories';
+} from '@the-monthly-expense/utils/categories';
 
 export const categoryInfo: Record<
   CategorySlug,

@@ -11,7 +11,7 @@ import {
 } from '@tanstack/react-router';
 import { ThemeProvider } from 'next-themes';
 
-import { defaultLocale } from '@the-monthly-sum/intl';
+import { defaultLocale } from '@the-monthly-expense/intl';
 
 import type { TRPCRouteContext } from '~/lib/trpc';
 import { getAuthContext } from '~/lib/auth';
@@ -34,7 +34,7 @@ export const Route = createRootRouteWithContext<TRPCRouteContext>()({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'The monthly sum',
+        title: 'The monthly expense',
       },
       { name: 'robots', content: 'noindex, nofollow' },
     ],

@@ -1,7 +1,7 @@
 import type { Locale } from 'use-intl';
 import { useNavigate } from '@tanstack/react-router';
 
-import { isLocale, locales } from '@the-monthly-sum/intl';
+import { isLocale, locales } from '@the-monthly-expense/intl';
 
 import { useLocaleFromRoute } from '~/hooks/route-context';
 import {

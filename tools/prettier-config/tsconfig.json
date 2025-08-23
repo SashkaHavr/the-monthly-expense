@@ -1,3 +1,3 @@
 {
-  "extends": "@the-monthly-sum/typescript-config"
+  "extends": "@the-monthly-expense/typescript-config"
 }

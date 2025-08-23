@@ -6,7 +6,7 @@ import {
 } from '@trpc/tanstack-react-query';
 import superjson from 'superjson';
 
-import type { TRPCRouter } from '@the-monthly-sum/trpc';
+import type { TRPCRouter } from '@the-monthly-expense/trpc';
 
 export function createTRPCRouteContext() {
   const queryClient = new QueryClient({

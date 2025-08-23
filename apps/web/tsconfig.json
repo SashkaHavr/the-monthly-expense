@@ -7,5 +7,5 @@
     "target": "ES2024",
     "lib": ["ES2024", "DOM", "DOM.Iterable"]
   },
-  "extends": "@the-monthly-sum/typescript-config"
+  "extends": "@the-monthly-expense/typescript-config"
 }

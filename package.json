@@ -1,5 +1,5 @@
 {
-  "name": "the-monthly-sum",
+  "name": "the-monthly-expense",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -22,9 +22,9 @@
     "test": "turbo test",
     "typecheck": "turbo typecheck"
   },
-  "prettier": "@the-monthly-sum/prettier-config",
+  "prettier": "@the-monthly-expense/prettier-config",
   "devDependencies": {
-    "@the-monthly-sum/prettier-config": "workspace:*",
+    "@the-monthly-expense/prettier-config": "workspace:*",
     "turbo": "^2.5.5"
   },
   "packageManager": "pnpm@10.13.1"

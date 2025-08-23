@@ -4,7 +4,7 @@ import {
   categorySlugs,
   subcategoriesByCategory,
   subcategorySlugs,
-} from '@the-monthly-sum/utils/categories';
+} from '@the-monthly-expense/utils/categories';
 
 import { db } from '#index.ts';
 import {

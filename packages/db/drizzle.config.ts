@@ -1,6 +1,6 @@
 import { defineConfig } from 'drizzle-kit';
 
-import { envDB } from '@the-monthly-sum/env/db';
+import { envDB } from '@the-monthly-expense/env/db';
 
 export default defineConfig({
   out: './drizzle',

@@ -1,4 +1,4 @@
-import { envServer } from '@the-monthly-sum/env/server';
+import { envServer } from '@the-monthly-expense/env/server';
 
 import { publicProcedure, router } from '#init.ts';
 

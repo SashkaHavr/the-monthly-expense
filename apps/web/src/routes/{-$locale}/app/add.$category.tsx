@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import z from 'zod';
 
-import { categorySlugs } from '@the-monthly-sum/utils/categories';
+import { categorySlugs } from '@the-monthly-expense/utils/categories';
 
 export const Route = createFileRoute('/{-$locale}/app/add/$category')({
   params: {

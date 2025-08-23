@@ -52,4 +52,4 @@ export async function getIntlContext(localeRouteParam: string | undefined) {
   };
 }
 
-export const localeHeader = 'the-monthly-sum-Locale';
+export const localeHeader = 'the-monthly-expense-Locale';

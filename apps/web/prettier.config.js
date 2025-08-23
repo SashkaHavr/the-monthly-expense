@@ -1,4 +1,4 @@
-import prettierBaseConfig from '@the-monthly-sum/prettier-config';
+import prettierBaseConfig from '@the-monthly-expense/prettier-config';
 
 export default {
   ...prettierBaseConfig,

@@ -1,7 +1,7 @@
 import { createMiddleware, createServerFn } from '@tanstack/react-start';
 import { getWebRequest } from '@tanstack/react-start/server';
 
-import { auth } from '@the-monthly-sum/auth';
+import { auth } from '@the-monthly-expense/auth';
 
 export const authServerFnMiddleware = createMiddleware({
   type: 'function',

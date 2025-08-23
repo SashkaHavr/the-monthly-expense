@@ -1,8 +1,8 @@
-# Requirements for The Monthly Sum
+# Requirements for The Monthly Expense
 
 ## 1.0 Introduction
 
-The Monthly Sum is a mobile and web application designed for effortless personal finance tracking. Its core philosophy is **simplicity and speed**. To facilitate rapid entry, the app opens directly to the "Add Transaction" screen. It helps users quickly log transactions and understand their spending habits through a clean, visual interface, avoiding the complexity of traditional accounting tools by focusing on what matters most: providing a clear, immediate picture of one's financial health.
+The Monthly Expense is a mobile and web application designed for effortless personal finance tracking. Its core philosophy is **simplicity and speed**. To facilitate rapid entry, the app opens directly to the "Add Transaction" screen. It helps users quickly log transactions and understand their spending habits through a clean, visual interface, avoiding the complexity of traditional accounting tools by focusing on what matters most: providing a clear, immediate picture of one's financial health.
 
 ## 2.0 Functional Requirements
 

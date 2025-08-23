@@ -1,5 +1,5 @@
 {
-  "name": "@the-monthly-sum/web",
+  "name": "@the-monthly-expense/web",
   "private": true,
   "type": "module",
   "scripts": {
@@ -25,10 +25,10 @@
     "@tanstack/react-router-ssr-query": "catalog:vite",
     "@tanstack/react-start": "catalog:vite",
     "@tanstack/router-plugin": "catalog:vite",
-    "@the-monthly-sum/auth": "workspace:*",
-    "@the-monthly-sum/intl": "workspace:*",
-    "@the-monthly-sum/trpc": "workspace:*",
-    "@the-monthly-sum/utils": "workspace:*",
+    "@the-monthly-expense/auth": "workspace:*",
+    "@the-monthly-expense/intl": "workspace:*",
+    "@the-monthly-expense/trpc": "workspace:*",
+    "@the-monthly-expense/utils": "workspace:*",
     "@trpc/client": "catalog:trpc",
     "@trpc/tanstack-react-query": "catalog:trpc",
     "@vitejs/plugin-react": "catalog:vite",
@@ -50,9 +50,9 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@the-monthly-sum/eslint-config": "workspace:*",
-    "@the-monthly-sum/prettier-config": "workspace:*",
-    "@the-monthly-sum/typescript-config": "workspace:*",
+    "@the-monthly-expense/eslint-config": "workspace:*",
+    "@the-monthly-expense/prettier-config": "workspace:*",
+    "@the-monthly-expense/typescript-config": "workspace:*",
     "@types/bun": "catalog:",
     "@types/react": "catalog:react",
     "@types/react-dom": "catalog:react",

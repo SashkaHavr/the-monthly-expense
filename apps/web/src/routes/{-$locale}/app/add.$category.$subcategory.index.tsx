@@ -3,8 +3,8 @@ import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { ArrowLeftIcon } from 'lucide-react';
 import z from 'zod';
 
-import { subcategorySlugs } from '@the-monthly-sum/utils/categories';
-import { expenseSchema } from '@the-monthly-sum/utils/schemas';
+import { subcategorySlugs } from '@the-monthly-expense/utils/categories';
+import { expenseSchema } from '@the-monthly-expense/utils/schemas';
 import { Button } from '~/components/ui/button';
 
 import { useAppForm } from '~/components/form/use-app-form';

@@ -1,6 +1,10 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 
-import { defaultLocale, getIntlContext, isLocale } from '@the-monthly-sum/intl';
+import {
+  defaultLocale,
+  getIntlContext,
+  isLocale,
+} from '@the-monthly-expense/intl';
 
 import { IntlProvider } from '~/lib/intl';
 import { getAcceptLanguageHeaderServerFn } from '~/lib/intl-server';

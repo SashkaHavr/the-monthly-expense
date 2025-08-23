@@ -2,12 +2,12 @@ import { TRPCError } from '@trpc/server';
 import { eq } from 'drizzle-orm';
 import z from 'zod';
 
-import { auth } from '@the-monthly-sum/auth';
-import { db } from '@the-monthly-sum/db';
+import { auth } from '@the-monthly-expense/auth';
+import { db } from '@the-monthly-expense/db';
 import {
   budget as budgetTable,
   profile as profileTable,
-} from '@the-monthly-sum/db/schema';
+} from '@the-monthly-expense/db/schema';
 
 import { protectedProcedure, router } from '#init.ts';
 
