@@ -7,8 +7,6 @@
 - [x] Change month select to 3 last month radio
 - [x] Swap dashboard and add icons
 - [x] Add desktop navigation
-- [ ] Add setting for default tab
-- [ ] Add organisation management in settings
 - [ ] Create month + year select component for dashboard
 - [ ] Add compare toggle + select for comparison - earlier dates are disabled
 - [ ] Add pie chart for categories
@@ -19,3 +17,6 @@
 - [ ] Analytic agent
 - [ ] Add/delete/edit agent
 - [ ] Paste image in chat
+- [ ] Add setting for default tab
+- [ ] Store tab state
+- [ ] Add organisation management in settings

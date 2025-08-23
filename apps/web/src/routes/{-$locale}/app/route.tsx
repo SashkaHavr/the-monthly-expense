@@ -12,10 +12,14 @@ import { Separator } from '~/components/ui/separator';
 import type { NavInfo } from '~/utils/nav-info';
 import { BottomNav, BottomNavItem } from '~/components/bottom-nav';
 import { Sidebar, SidebarItem } from '~/components/sidebar';
+import { SplashScreeen } from '~/components/splash-screen';
 import { useBreakpoint } from '~/hooks/useBreakpoint';
 import { getCategoriesServerFn } from '~/lib/trpc-server';
 
 export const Route = createFileRoute('/{-$locale}/app')({
+  ssr: 'data-only',
+  pendingComponent: SplashScreeen,
+  pendingMinMs: 100,
   beforeLoad: async ({ context: { queryClient, trpc, auth } }) => {
     if (!auth.loggedIn || !auth.session.activeOrganizationId) {
       throw redirect({ to: '/{-$locale}' });
