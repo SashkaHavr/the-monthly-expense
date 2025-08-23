@@ -82,4 +82,9 @@ export const auth = betterAuth({
     }),
     organization(),
   ],
+  advanced: {
+    database: {
+      generateId: false,
+    },
+  },
 });

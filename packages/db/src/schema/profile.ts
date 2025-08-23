@@ -1,13 +1,17 @@
-import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { index, pgTable, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 import { user } from './auth';
 import { budget } from './budget';
 
-export const profile = pgTable('profile', {
-  id: uuid().defaultRandom().primaryKey(),
-  createdAt: timestamp().notNull().defaultNow(),
-  userId: text()
-    .notNull()
-    .references(() => user.id),
-  selectedBudget: uuid().references(() => budget.id),
-});
+export const profile = pgTable(
+  'profile',
+  {
+    id: uuid().defaultRandom().primaryKey(),
+    createdAt: timestamp().notNull().defaultNow(),
+    userId: uuid()
+      .notNull()
+      .references(() => user.id),
+    selectedBudget: uuid().references(() => budget.id, { onDelete: 'cascade' }),
+  },
+  (table) => [index('idx_profile_user_id').on(table.userId)],
+);

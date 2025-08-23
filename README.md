@@ -2,8 +2,8 @@
 
 ## TODO
 
-- [ ] Change month/year format to ints
-- [ ] Add db indices
+- [x] Change month/year format to ints
+- [x] Add db indices
 - [ ] Change month select to 3 last month radio
 - [ ] Swap dashboard and add icons
 - [ ] Add setting for default tab
