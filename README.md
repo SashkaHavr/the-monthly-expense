@@ -5,7 +5,8 @@
 - [x] Change month/year format to ints
 - [x] Add db indices
 - [x] Change month select to 3 last month radio
-- [ ] Swap dashboard and add icons
+- [x] Swap dashboard and add icons
+- [x] Add desktop navigation
 - [ ] Add setting for default tab
 - [ ] Add organisation management in settings
 - [ ] Create month + year select component for dashboard

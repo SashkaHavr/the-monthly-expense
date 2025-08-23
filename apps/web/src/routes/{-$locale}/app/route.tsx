@@ -7,8 +7,12 @@ import {
 } from 'lucide-react';
 
 import { ScrollArea } from '~/components/ui/scroll-area';
+import { Separator } from '~/components/ui/separator';
 
+import type { NavInfo } from '~/utils/nav-info';
 import { BottomNav, BottomNavItem } from '~/components/bottom-nav';
+import { Sidebar, SidebarItem } from '~/components/sidebar';
+import { useBreakpoint } from '~/hooks/useBreakpoint';
 import { getCategoriesServerFn } from '~/lib/trpc-server';
 
 export const Route = createFileRoute('/{-$locale}/app')({
@@ -25,29 +29,60 @@ export const Route = createFileRoute('/{-$locale}/app')({
   component: RouteComponent,
 });
 
+const navigationInformation: NavInfo[] = [
+  {
+    label: 'Dashboard',
+    icon: PieChartIcon,
+    to: '/{-$locale}/app/dashboard',
+  },
+  {
+    label: 'Add',
+    icon: PlusIcon,
+    to: '/{-$locale}/app/add',
+  },
+  {
+    label: 'Chat',
+    icon: MessageCircleIcon,
+    to: '/{-$locale}/app/chat',
+  },
+  {
+    label: 'Profile',
+    icon: UserIcon,
+    to: '/{-$locale}/app/profile',
+  },
+];
+
 function RouteComponent() {
-  return (
+  const sm = useBreakpoint('sm');
+  const lg = useBreakpoint('lg');
+
+  return sm ? (
+    <div>
+      <div className="flex h-screen">
+        <Sidebar className="px-4 pt-10">
+          {navigationInformation.map((item) => (
+            <SidebarItem key={item.label} {...item} expanded={lg} />
+          ))}
+        </Sidebar>
+        <Separator orientation="vertical" />
+        <ScrollArea className="max-h-screen grow">
+          <div className="flex justify-center">
+            <div className="w-[768px]">
+              <Outlet />
+            </div>
+          </div>
+        </ScrollArea>
+      </div>
+    </div>
+  ) : (
     <div className="flex h-screen max-h-screen flex-col">
       <ScrollArea className="max-h-[calc(100vh-64px)] grow">
         <Outlet />
       </ScrollArea>
       <BottomNav>
-        <BottomNavItem label="Add" icon={PlusIcon} to="/{-$locale}/app/add" />
-        <BottomNavItem
-          label="Dashboard"
-          icon={PieChartIcon}
-          to="/{-$locale}/app/dashboard"
-        />
-        <BottomNavItem
-          label="Chat"
-          icon={MessageCircleIcon}
-          to="/{-$locale}/app/chat"
-        />
-        <BottomNavItem
-          label="Profile"
-          icon={UserIcon}
-          to="/{-$locale}/app/profile"
-        />
+        {navigationInformation.map((item) => (
+          <BottomNavItem key={item.label} {...item} />
+        ))}
       </BottomNav>
     </div>
   );

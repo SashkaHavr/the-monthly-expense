@@ -1,25 +1,23 @@
-import type { LinkProps } from '@tanstack/react-router';
+import type React from 'react';
 import { Link } from '@tanstack/react-router';
 
+import type { NavInfo } from '~/utils/nav-info';
+import { cn } from '~/lib/utils';
 import { Button } from './ui/button';
 
-export function BottomNav({ children }: { children?: React.ReactNode }) {
+export function BottomNav({
+  className,
+  ...props
+}: React.ComponentProps<'nav'>) {
   return (
-    <nav className="gap-2 bg-sidebar">
-      <div className="flex justify-around">{children}</div>
-    </nav>
+    <nav
+      className={cn('flex justify-around gap-2 bg-sidebar', className)}
+      {...props}
+    />
   );
 }
 
-export function BottomNavItem({
-  label,
-  icon: IconElement,
-  to,
-}: {
-  label: string;
-  icon: React.ComponentType<{ className?: string }>;
-  to: LinkProps['to'];
-}) {
+export function BottomNavItem({ label, icon: IconElement, to }: NavInfo) {
   return (
     <Button
       asChild
