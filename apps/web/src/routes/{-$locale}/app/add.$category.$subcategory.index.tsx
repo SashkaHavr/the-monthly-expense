@@ -91,7 +91,7 @@ function RouteComponent() {
       <div className="flex flex-col gap-8">
         <h1 className="text-center text-2xl font-bold">Enter Details</h1>
         <form
-          className="flex flex-col gap-6"
+          className="flex flex-col"
           onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -99,13 +99,15 @@ function RouteComponent() {
           }}
         >
           <form.AppField name="amount">
-            {(field) => <field.FormMoneyInput className="self-center" />}
+            {(field) => <field.FormMoneyInput className="mb-8 self-center" />}
           </form.AppField>
           <form.AppField name="month">
-            {(field) => <field.FormMonthSelect />}
+            {(field) => <field.FormMonthSelect className="mb-6" />}
           </form.AppField>
           <form.AppField name="description">
-            {(field) => <field.FormTextarea placeholder="Description" />}
+            {(field) => (
+              <field.FormTextarea className="mb-6" placeholder="Description" />
+            )}
           </form.AppField>
           <form.AppForm>
             <form.FormSubmitButton label="Add" defaultInvalid />

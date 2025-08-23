@@ -1,19 +1,15 @@
 import { useFormatter } from 'use-intl';
 
+import { useBreakpoint } from '~/hooks/useBreakpoint';
+import { cn } from '~/lib/utils';
 import { getCurrentMonth, getMonthISOString } from '~/utils/month';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../ui/select';
+import { RadioGroup, RadioGroupItemBadge } from '../ui/radio-group';
 import { useFieldContext } from './form-context';
 
-export function FormMonthSelect() {
+export function FormMonthSelect({ className }: { className?: string }) {
   const format = useFormatter();
   const currentMonth = getCurrentMonth();
-  const twelvePastMonths = Array.from({ length: 12 }, (_, i) => {
+  const threePastMonths = Array.from({ length: 3 }, (_, i) => {
     const month = new Date(currentMonth);
     month.setMonth(month.getMonth() - i);
     return {
@@ -23,31 +19,34 @@ export function FormMonthSelect() {
   });
 
   const field = useFieldContext<string>();
+  const sm = useBreakpoint('sm');
 
   return (
-    <Select
+    <RadioGroup
+      className={cn(
+        'gid grid-cols-3 justify-center justify-items-stretch',
+        className,
+      )}
       value={field.state.value}
       onValueChange={(value) => field.handleChange(value)}
+      name={field.name}
+      onBlur={field.handleBlur}
     >
-      <SelectTrigger
-        id={field.name}
-        name={field.name}
-        onBlur={field.handleBlur}
-      >
-        <SelectValue placeholder="Select a month">
-          {
-            twelvePastMonths.find((m) => m.iso === field.state.value)
-              ?.formattedStr
-          }
-        </SelectValue>
-      </SelectTrigger>
-      <SelectContent>
-        {twelvePastMonths.map((month) => (
-          <SelectItem key={month.iso} value={month.iso}>
-            {month.formattedStr}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+      {threePastMonths.map((month, index) => (
+        <RadioGroupItemBadge
+          key={month.iso}
+          value={month.iso}
+          id={`month-${index}`}
+        >
+          <span className="flex flex-col items-center">
+            {sm
+              ? month.formattedStr
+              : month.formattedStr
+                  .split(' ')
+                  .map((word, i) => <span key={i}>{word}</span>)}
+          </span>
+        </RadioGroupItemBadge>
+      ))}
+    </RadioGroup>
   );
 }
