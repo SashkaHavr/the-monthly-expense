@@ -24,7 +24,7 @@ export function CategoryItem({
             {<info.icon size={24} className="text-white" />}
           </div>
           <div>
-            <h3 className="text-center font-medium">{info.name}</h3>
+            <h3 className="text-center font-medium">{info.label}</h3>
           </div>
         </div>
       </Card>

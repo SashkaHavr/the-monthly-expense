@@ -14,103 +14,103 @@ import type {
 export const categoryInfo: Record<
   CategorySlug,
   {
-    name: string;
+    label: string;
     color: string;
     icon: React.ComponentType<{ className?: string; size?: number }>;
   }
 > = {
-  housing: { name: 'Housing', color: 'bg-red-500', icon: Home },
-  daily: { name: 'Daily', color: 'bg-blue-500', icon: ShoppingCart },
-  financial: { name: 'Financial', color: 'bg-green-500', icon: PiggyBank },
-  insurance: { name: 'Insurance', color: 'bg-yellow-500', icon: Shield },
-  income: { name: 'Income', color: 'bg-purple-500', icon: DollarSign },
+  housing: { label: 'Housing', color: 'bg-red-500', icon: Home },
+  daily: { label: 'Daily', color: 'bg-blue-500', icon: ShoppingCart },
+  financial: { label: 'Financial', color: 'bg-green-500', icon: PiggyBank },
+  insurance: { label: 'Insurance', color: 'bg-yellow-500', icon: Shield },
+  income: { label: 'Income', color: 'bg-purple-500', icon: DollarSign },
 };
 
 export const subcategoryInfo: Record<
   SubcategorySlug,
   {
-    name: string;
+    label: string;
   }
 > = {
   rent: {
-    name: 'Rent',
+    label: 'Rent',
   },
   utilities: {
-    name: 'Utilities',
+    label: 'Utilities',
   },
   internet: {
-    name: 'Internet',
+    label: 'Internet',
   },
   maintenance: {
-    name: 'Maintenance',
+    label: 'Maintenance',
   },
   furniture: {
-    name: 'Furniture',
+    label: 'Furniture',
   },
   'housing-other': {
-    name: 'Other',
+    label: 'Other',
   },
   groceries: {
-    name: 'Groceries',
+    label: 'Groceries',
   },
   dining: {
-    name: 'Dining & Restaurants',
+    label: 'Dining & Restaurants',
   },
   transportation: {
-    name: 'Transportation',
+    label: 'Transportation',
   },
   shopping: {
-    name: 'Shopping',
+    label: 'Shopping',
   },
   entertainment: {
-    name: 'Entertainment',
+    label: 'Entertainment',
   },
   'personal-care': {
-    name: 'Personal Care',
+    label: 'Personal Care',
   },
   medical: {
-    name: 'Medical & Health',
+    label: 'Medical & Health',
   },
   'daily-other': {
-    name: 'Other',
+    label: 'Other',
   },
   savings: {
-    name: 'Savings',
+    label: 'Savings',
   },
   investments: {
-    name: 'Investments',
+    label: 'Investments',
   },
   'loan-repayments': {
-    name: 'Loan Repayments',
+    label: 'Loan Repayments',
   },
   'bank-fees': {
-    name: 'Bank Fees',
+    label: 'Bank Fees',
   },
   'financial-other': {
-    name: 'Other',
+    label: 'Other',
   },
   'health-insurance': {
-    name: 'Health Insurance',
+    label: 'Health Insurance',
   },
   'car-insurance': {
-    name: 'Car Insurance',
+    label: 'Car Insurance',
   },
   'home-insurance': {
-    name: 'Home Insurance',
+    label: 'Home Insurance',
   },
   'insurance-other': {
-    name: 'Other',
+    label: 'Other',
   },
   salary: {
-    name: 'Salary',
+    label: 'Salary',
   },
   freelance: {
-    name: 'Freelance Income',
+    label: 'Freelance Income',
   },
   gifts: {
-    name: 'Gifts',
+    label: 'Gifts',
   },
   'income-other': {
-    name: 'Other',
+    label: 'Other',
   },
 };
