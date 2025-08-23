@@ -9,11 +9,7 @@ import { Button } from '~/components/ui/button';
 
 import { useAppForm } from '~/components/form/use-app-form';
 import { useTRPC } from '~/lib/trpc';
-import {
-  getCurrentMonth,
-  getMonthISOString,
-  parseMonthIsoString,
-} from '~/utils/month';
+import { getCurrentMonth, getMonthISOString } from '~/utils/month';
 
 export const Route = createFileRoute(
   '/{-$locale}/app/add/$category/$subcategory/',
@@ -73,9 +69,11 @@ function RouteComponent() {
       onMount: expenseSchema,
     },
     onSubmit: async ({ value }) => {
+      const date = new Date(value.month);
       await createExpense.mutateAsync({
         ...value,
-        ...parseMonthIsoString(value.month),
+        month: date.getMonth(),
+        year: date.getFullYear(),
         subcategorySlug: subcategory.slug,
       });
     },
