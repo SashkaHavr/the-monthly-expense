@@ -20,6 +20,8 @@ export const expenseRouter = router({
     .input(
       z.object({
         ...expenseSchema.shape,
+        month: z.int().min(1).max(12),
+        year: z.int(),
         subcategorySlug: z.enum(subcategorySlugs),
       }),
     )

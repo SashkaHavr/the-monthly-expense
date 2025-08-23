@@ -1,5 +1,4 @@
 import {
-  char,
   integer,
   pgTable,
   text,
@@ -35,8 +34,8 @@ export const expense = pgTable('expense', {
   createdAt: timestamp().notNull().defaultNow(),
   amount: integer().notNull(),
   description: varchar({ length: 200 }).notNull(),
-  // YYYY-MM
-  month: char({ length: 7 }).notNull(),
+  month: integer().notNull(),
+  year: integer().notNull(),
   subcategoryId: uuid()
     .notNull()
     .references(() => expenseSubcategory.id),

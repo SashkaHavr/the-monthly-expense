@@ -9,7 +9,11 @@ import { Button } from '~/components/ui/button';
 
 import { useAppForm } from '~/components/form/use-app-form';
 import { useTRPC } from '~/lib/trpc';
-import { getCurrentMonth, getMonthISOString } from '~/utils/month';
+import {
+  getCurrentMonth,
+  getMonthISOString,
+  parseMonthIsoString,
+} from '~/utils/month';
 
 export const Route = createFileRoute(
   '/{-$locale}/app/add/$category/$subcategory/',
@@ -71,6 +75,7 @@ function RouteComponent() {
     onSubmit: async ({ value }) => {
       await createExpense.mutateAsync({
         ...value,
+        ...parseMonthIsoString(value.month),
         subcategorySlug: subcategory.slug,
       });
     },
