@@ -50,7 +50,7 @@ function RadioGroupItemBadge({
     <RadioGroupPrimitive.Item
       data-slot="radio-group-item"
       className={cn(
-        'flex justify-center rounded-lg border-1 border-muted-foreground p-4 text-muted-foreground transition-colors data-[state=checked]:border-2 data-[state=checked]:border-accent-foreground data-[state=checked]:p-3.75 data-[state=checked]:text-accent-foreground',
+        'flex justify-center rounded-lg border-1 border-muted-foreground px-4 py-2 text-muted-foreground transition-colors data-[state=checked]:border-2 data-[state=checked]:border-accent-foreground data-[state=checked]:px-3.75 data-[state=checked]:py-1.75 data-[state=checked]:text-accent-foreground',
         className,
       )}
       {...props}
