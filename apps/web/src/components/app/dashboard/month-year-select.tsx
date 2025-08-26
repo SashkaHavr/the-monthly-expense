@@ -33,7 +33,9 @@ export function MonthYearSelect({
   };
   const firstDate = props.firstDate ?? { month: 0, year: 2000 };
 
-  const years = Array.from({ length: 20 })
+  const years = Array.from({
+    length: lastDate.year - firstDate.year + 1,
+  })
     .map((_, index) => lastDate.year - index)
     .map((year) => year.toString());
   const selectedYear = value.year;
@@ -77,7 +79,7 @@ export function MonthYearSelect({
       </RadioGroup>
       <Separator />
       <RadioGroup
-        className="grid-cols-3 grid-rows-5"
+        className="grid-cols-3"
         value={value.month == undefined ? 'full-year' : value.month.toString()}
         onValueChange={(value) =>
           onValueChange({
